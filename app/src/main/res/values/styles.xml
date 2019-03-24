@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorSecondary</item>
     </style>
 
+
+
+    <style name="textTheme">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColorHint">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
+    <style name="editTheme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

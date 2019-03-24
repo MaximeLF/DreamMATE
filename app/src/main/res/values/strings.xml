@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">Dream Mate</string>
-    <string name="slogan">Find your Dream Mate</string>
+    <string name="slogan">Find your Dream Mate!</string>
     <string name="login">Login</string>
-    <string name="email">Email</string>
+    <string name="email">Email address</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="forgot_pass">Forgot my password</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+
+
+    <string name="email_hint">Enter your email address</string>
+    <string name="name">Name</string>
+    <string name="name_hint">Enter your full name</string>
+    <string name="insert_password_hint">Insert your password</string>
+    <string name="create_password_hint">Choose a secure password</string>
+    <string name="confirm_password_hint">Confirm your password</string>
 </resources>
