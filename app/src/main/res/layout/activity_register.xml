@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
+    android:background="@color/colorPrimary"
     tools:context=".RegisterActivity">
 
     <android.support.constraint.ConstraintLayout
@@ -23,29 +23,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/registerNameText"
+            app:layout_constraintBottom_toTopOf="@id/registerDescription"
             app:srcCompat="@drawable/ic_logo2" />
 
         <TextView
+            android:id="@+id/registerDescription"
+            android:text="@string/register"
+            style="@style/headerTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/registerLogo"
+            app:layout_constraintBottom_toTopOf="@id/registerNameText" />
+
+        <TextView
             android:id="@+id/registerNameText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:text="@string/name"
             style="@style/textTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/registerLogo"
+            app:layout_constraintTop_toBottomOf="@id/registerDescription"
             app:layout_constraintBottom_toTopOf="@id/registerNameEdit" />
 
         <EditText
             android:id="@+id/registerNameEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:hint="@string/name_hint"
             style="@style/editTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,10 +55,6 @@
 
         <TextView
             android:id="@+id/registerEmailText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:text="@string/email"
             style="@style/textTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,10 +64,6 @@
 
         <EditText
             android:id="@+id/registerEmailEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:inputType="textEmailAddress"
             android:hint="@string/email_hint"
             style="@style/editTheme"
@@ -82,10 +74,6 @@
 
         <TextView
             android:id="@+id/registerPassword1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:text="@string/create_password_hint"
             style="@style/textTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,12 +83,8 @@
 
         <EditText
             android:id="@+id/registerPassword1Edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:inputType="textPassword"
-            android:hint="@string/create_password_hint"
+            android:hint="@string/insert_password_hint"
             style="@style/editTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,10 +93,6 @@
 
         <TextView
             android:id="@+id/registerPassword2Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:text="@string/confirm_password_hint"
             style="@style/textTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,12 +102,8 @@
 
         <EditText
             android:id="@+id/registerPassword2Edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:inputType="textPassword"
-            android:hint="@string/confirm_password_hint"
+            android:hint="@string/reinsert_password_hint"
             style="@style/editTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/sign_up"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
