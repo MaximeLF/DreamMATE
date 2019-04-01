@@ -10,6 +10,9 @@
 .DS_Store
 /build
 /captures
+/server/variables.env
+/server/node_modules/*
+/server/.idea/*
 .externalNativeBuild
 # Built application files
 *.apk
