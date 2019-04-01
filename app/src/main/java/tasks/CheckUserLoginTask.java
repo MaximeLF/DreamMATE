@@ -1,7 +1,11 @@
 package tasks;
 
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.dreammate.LoginActivity;
 import com.dreammate.R;
-import com.dreammate.RegisterActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -12,19 +16,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.Log;
-
 import model.User;
 
-
-public class RegisterUserTask extends AsyncTask<User, Void, User>
+public class CheckUserLoginTask extends AsyncTask<User, Void, User>
 {
-    private WeakReference<RegisterActivity> regUserWeakRef;
+    private WeakReference<LoginActivity> loginWeakRef;
 
-    public RegisterUserTask (RegisterActivity registerActivity) {
-        regUserWeakRef = new WeakReference<>(registerActivity);
+    public CheckUserLoginTask(LoginActivity loginActivity) {
+        loginWeakRef = new WeakReference<>(loginActivity);
     }
 
     @Override
@@ -34,37 +33,37 @@ public class RegisterUserTask extends AsyncTask<User, Void, User>
 
     @Override
     protected User doInBackground(User... users) {
+        User user = users[0];
 
-        User baseUser = users[0];
-
-        if (regUserWeakRef != null)
+        if (loginWeakRef != null)
         {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("https");
-            String server = regUserWeakRef.get().getApplicationContext().getResources().getString(R.string.server_url);
+            String server = loginWeakRef.get().getApplicationContext().getResources().getString(R.string.server_url);
             builder.authority(server);
             builder.appendPath("dev");
-            builder.appendPath("users");
+            builder.appendPath("authentication");
             builder.appendPath("");
 
             try {
-                Gson gson = new GsonBuilder().create();
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
                 URL url = new URL(builder.build().toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("Content-Type", "application/json");
 
-                connection.setRequestMethod("POST");
+                connection.setRequestMethod("GET");
                 connection.setDoInput(true);
 
-                String body = gson.toJson(baseUser);
+                String body = gson.toJson(user);
+
+                Log.d("lua", "Sending " + body);
 
                 connection.setDoOutput(true);
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(body);
                 writer.flush();
                 writer.close();
-
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
                 {
@@ -74,14 +73,20 @@ public class RegisterUserTask extends AsyncTask<User, Void, User>
                     String answer = s.hasNext() ? s.next() : "";
                     Log.d("lua", "Received : " + answer);
 
-                    User user = gson.fromJson(answer, User.class);
+                    String id = gson.fromJson(answer, String.class);
 
                     reader.close();
                     connection.disconnect();
 
-                    Log.d("lua", (user == null) ? "Null user!" : user.toString());
+                    if (id.equals("-1")) {
+                        return null;
+                    }
+                    user.id = id;
 
                     return user;
+                }
+                else {
+                    Log.d("lua", "Response code was NOT OK");
                 }
             }
             catch (Exception e) {
@@ -94,8 +99,8 @@ public class RegisterUserTask extends AsyncTask<User, Void, User>
     @Override
     protected void onPostExecute(User user) {
         super.onPostExecute(user);
-        if (regUserWeakRef != null) {
-            regUserWeakRef.get().confirmRegistration(user);
+        if (loginWeakRef != null) {
+            loginWeakRef.get().confirmLogin(user);
         }
     }
 }
