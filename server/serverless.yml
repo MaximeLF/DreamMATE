@@ -1,12 +1,13 @@
 
 
-service: DreamMATE-rest-api # NOTE: update this with your service name
+service: DreamMATE-rest-api
 
 
 provider:
   name: aws
   runtime: nodejs8.10
-
+  region: eu-central-1
+  stage: dev
 
 
 functions:
@@ -14,8 +15,35 @@ functions:
     handler: bin/www.handler
     # The `events` block defines how to trigger the http events
     events:
-        - http: ANY /
-        - http: 'ANY {proxy+}'
+        - http:
+            path: users
+            method: get
+            cors: true
+        - http:
+            path: users
+            method: post
+            cors: true
+        - http:
+            path: users/{id}
+            method: put
+            cors: true
+        - http:
+            path: authentication/{email_address}/{encrypted_password}
+            method: get
+            cors: true
+        - http:
+            path: countries_list
+            method: get
+            cors: true
+        - http:
+            path: languages_list
+            method: get
+            cors: true
+        - http:
+            path: film_types
+            method: get
+            cors: true
+
 
 
 

@@ -3,7 +3,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const country_List = require('country-list');
-let language_List = require('language-list')();
+const language_List = require('langs');
+const countries = country_List.getNames();
+const languages = language_List.names();
+const film_types = ['action', 'romantic', 'comedy','science fiction','documentary','thriller','horror','adventure','historical drama'];
 
 let UserSchema = new Schema({
     first_name: {
@@ -24,21 +27,21 @@ let UserSchema = new Schema({
         type: Date,
     },
     gender:{
-        type: [{
+        type: {
             type: String,
             enum: ['male', 'female']
-        }]
+        }
     },
     origin_country:{
-        type: [{
+        type: {
             type: String,
-            enum: ['France','USA','Spain','England','Germany']//country_List.getNameList()
-        }],
+            enum: countries
+        },
     },
     languages_spoken:{
         type: [{
             type: String,
-            enum: ['french','english','spanish','german']//language_List.getLanguageNames()
+            enum: languages
         }],
     },
     Created_date: {
@@ -48,9 +51,8 @@ let UserSchema = new Schema({
     film_type: {
         type: [{
             type: String,
-            enum: ['action', 'romantic', 'comedy','science fiction','documentary','thriller','horror','adventure','historical drama']
+            enum: film_types
         }],
-        //default: ['pending']
     },
     min_budget: {
         type: Number,
@@ -71,11 +73,12 @@ let UserSchema = new Schema({
         type : Boolean,
     },
     sleep_time:{
-        type: [{
+        type: {
             type: String,
             enum: ['9:00-10:00','10:00-12:00','12:00+']
-        }],
+        },
     }
 });
 
 module.exports = mongoose.model('Users', UserSchema);
+exports.film_type = film_types;
