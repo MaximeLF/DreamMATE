@@ -1,31 +1,108 @@
 package model;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public class User {
 
-    enum Gender {FEMALE, MALE, OTHER};
-    enum SleepTime {EARLY, AVERAGE, LATE};
-
+    @SerializedName("_id")
     public String id;
+
+    @SerializedName("first_name")
     public String firstName;
+
+    @SerializedName("last_name")
     public String lastName;
+
+    @SerializedName("email_address")
     public String email;
-    public Date birthDate;
-    public Gender gender;
+
+    @SerializedName("encrypted_password")
+    public String encrypted;
+
+    @SerializedName("gender")
+    public String gender;
+
+    @SerializedName("origin_country")
     public String originCountry;
-    public String spokenLanguages;
-    public Date createdAt;
-    public int minBudget;
-    public int maxBudget;
-    public Date arrival;
-    public Date departure;
-    public boolean smoker;
-    public boolean likesPets;
-    public SleepTime sleepTime;
 
-    public ArrayList<Hobby> hobbies;
+    @SerializedName("languages_spoken")
+    public List<String> languagesSpoken;
 
+    @SerializedName("film_type")
+    public List<String> filmTypes;
+
+    @SerializedName("sleep_time")
+    public String sleepTime;
+
+    @SerializedName("Created_date")
+    public String createdDate;
+
+    @SerializedName("__v")
+    private int v;
+
+    public String hash(String password)
+    {
+        try {
+            MessageDigest digester = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = digester.digest(password.getBytes());
+            return new String(Base64.encode(bytes, Base64.DEFAULT)).trim(); // The trim is necessary otherwise we get a trailing \n
+        }
+        catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public User(String email, String password)
+    {
+        this.email = email;
+        encrypted = hash(password);
+    }
+
+
+    public User(String fName, String lName, String email, String password)
+    {
+        firstName = fName;
+        lastName = lName;
+        this.email = email;
+        encrypted = hash(password);
+    }
+
+    public void login(AppCompatActivity activity)
+    {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putString("user_id", id);
+        ed.putString("first_name", firstName);
+        ed.putString("last_name", lastName);
+        ed.apply();
+    }
+
+    public static void logout(Context context)
+    {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor ed = sp.edit();
+        ed.remove("user_id");
+        ed.remove("first_name");
+        ed.remove("last_name");
+        ed.apply();
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + firstName + " " + lastName + " " + email + " " + encrypted;
+    }
 }

@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/profileDescription"
-            android:text="@string/create_profile"
+            android:text="@string/tell_us_more"
 
             style="@style/headerTheme"
             app:layout_constraintStart_toStartOf="parent"
