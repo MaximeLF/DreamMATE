@@ -11,6 +11,15 @@ module.exports = function(app) {
         .get(user.read_a_user)
         .put(user.modify_a_user);
 
-    app.route('/authentication')
+    app.route('/authentication/:email_address/:encrypted_password')
         .get(user.authentication);
+
+    app.route('/countries_list')
+        .get(user.country_list);
+
+    app.route('/languages_list')
+        .get(user.language_list);
+
+    app.route('/film_types')
+        .get(user.film_types);
 };
