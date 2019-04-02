@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -43,7 +42,8 @@ public class CheckUserLoginTask extends AsyncTask<User, Void, User>
             builder.authority(server);
             builder.appendPath("dev");
             builder.appendPath("authentication");
-            builder.appendPath("");
+            builder.appendPath(user.email);
+            builder.appendPath(user.encrypted);
 
             try {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -53,17 +53,7 @@ public class CheckUserLoginTask extends AsyncTask<User, Void, User>
                 connection.setRequestProperty("Content-Type", "application/json");
 
                 connection.setRequestMethod("GET");
-                connection.setDoInput(true);
 
-                String body = gson.toJson(user);
-
-                Log.d("lua", "Sending " + body);
-
-                connection.setDoOutput(true);
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(body);
-                writer.flush();
-                writer.close();
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
                 {
@@ -73,15 +63,15 @@ public class CheckUserLoginTask extends AsyncTask<User, Void, User>
                     String answer = s.hasNext() ? s.next() : "";
                     Log.d("lua", "Received : " + answer);
 
-                    String id = gson.fromJson(answer, String.class);
+                    User receivedUser = gson.fromJson(answer, User.class);
 
                     reader.close();
                     connection.disconnect();
 
-                    if (id.equals("-1")) {
+                    if (receivedUser.id.equals("-1")) {
                         return null;
                     }
-                    user.id = id;
+                    user.id = receivedUser.id;
 
                     return user;
                 }

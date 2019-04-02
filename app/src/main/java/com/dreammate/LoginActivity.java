@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         if (email.length() * password.length() == 0)
         {
             Toast.makeText(getApplicationContext(), getString(R.string.fill_fields), Toast.LENGTH_SHORT).show();
+            return;
         }
         User user = new User(email, password);
 
