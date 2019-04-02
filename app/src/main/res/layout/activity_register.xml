@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/registerDescription"
-            app:srcCompat="@drawable/ic_logo2" />
+            app:srcCompat="@drawable/dreammate_logo" />
 
         <TextView
             android:id="@+id/registerDescription"
