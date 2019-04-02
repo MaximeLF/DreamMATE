@@ -69,7 +69,7 @@ public class CheckUserLoginTask extends AsyncTask<User, Void, User>
                     connection.disconnect();
 
                     if (receivedUser.id.length() == 0) {
-                        return null;
+                        return user;
                     }
                     user.id = receivedUser.id;
                     user.firstName = receivedUser.firstName;

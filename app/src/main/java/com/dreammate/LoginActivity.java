@@ -53,15 +53,19 @@ public class LoginActivity extends AppCompatActivity {
 
     public void confirmLogin(User user)
     {
-        if (user != null)
+        if (user == null)
         {
+            Toast.makeText(getApplicationContext(), getString(R.string.server_error), Toast.LENGTH_SHORT).show();
+        }
+        else if (user.id == null || user.id.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), getString(R.string.wrong_credentials), Toast.LENGTH_SHORT).show();
+        }
+        else {
             user.login(this);
 
             Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
             startActivity(intent);
-        }
-        else {
-            Toast.makeText(getApplicationContext(), getString(R.string.server_error), Toast.LENGTH_SHORT).show();
         }
     }
 }

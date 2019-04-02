@@ -21,6 +21,7 @@
     <string name="unmatching_password">The passwords don\'t match!</string>
     <string name="server_unreachable">Can\'t reach the servers at this moment</string>
     <string name="fill_fields">All the fields must be filled</string>
+    <string name="wrong_credentials">Wrong credentials</string>
 
     <string name="server_error">Something went wrong with your request</string>
     <string name="server_url">ybxeql9z91.execute-api.eu-central-1.amazonaws.com</string>
