@@ -8,6 +8,7 @@ Things to do:
 - See your matches
 - Chat? (maybe)
 
+If you find a new task we should complete, write it in the list!
 If you are working on a task, write your name to its left and when you finish it, mark it as done!
 
 Good luck :D ("You'll need it" - Nuno Nunes)
