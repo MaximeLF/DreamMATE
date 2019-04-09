@@ -60,13 +60,13 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
 
                     Log.d("lua", "Received countries: " + answer);
 
-                    answer = answer.substring(1, answer.length() - 1); // remove '[' at the beginning and ']' at the end
+                    answer = answer.substring(2, answer.length() - 2); // remove '["' at the beginning and '"]' at the end
                     List<String> countries = new ArrayList<>();
-                    String[] words = answer.split(",");
+                    String[] words = answer.split("\",\"");
 
                     for (int i = 0; i < words.length; i++) {
                         String clean = words[i].trim();
-                        countries.add(clean.substring(1, clean.length() - 1));
+                        countries.add(clean);
                     }
 
                     return countries;
