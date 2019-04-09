@@ -1,0 +1,15 @@
+Things to do:
+- Forgot password
+- Finsih the create profile page
+- Settings page (or ChangeProfile page)
+- Main page
+- Task to retrieve cities from specific country
+- Compute your matches server-side
+- See your matches
+- Chat? (maybe)
+
+If you are working on a task, write your name to its left and when you finish it, mark it as done!
+
+Good luck :D ("You'll need it" - Nuno Nunes)
+
+For the 14th of April :0 
