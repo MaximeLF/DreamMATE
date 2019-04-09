@@ -16,12 +16,17 @@ import tasks.GetCountryListTask;
 
 public class CreateProfileActivity extends AppCompatActivity {
     List<String> countries = new ArrayList<String>();
+    List<String> languages = new ArrayList<~>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
+
         countries.add("Loading country list");
+        new GetCountryListTask(this).execute();
+
+        languages.add("Loading language list");
         new GetCountryListTask(this).execute();
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -38,17 +43,17 @@ public class CreateProfileActivity extends AppCompatActivity {
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, genderItems);
         genderDropdown.setAdapter(genderAdapter);
 
-        Spinner countryDropdown  = findViewById(R.id.countrySpinner);
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, countries);
-        countryDropdown.setAdapter(countryAdapter);
+
+
     }
 
     public void onCountriesResultComputed(List<String> result)
     {
-        Log.d("teresa", "Funciona");
         countries = new ArrayList<>(result);
-        Spinner countryDropdown  = findViewById(R.id.countrySpinner);
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, countries);
-        countryDropdown.setAdapter(countryAdapter);
     }
+
+    public void onlanguagesResultComputed(List<String> result)
+    {
+       languages = new ArrayList<>(result);
+
 }

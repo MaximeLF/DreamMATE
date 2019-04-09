@@ -37,4 +37,6 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="other">Other</string>
+    <string name="origin_country">Origin country</string>
+    <string name="country_hint">Select your country</string>
 </resources>
