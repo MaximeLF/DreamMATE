@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+public class GetFilmTypesTask extends AsyncTask<Void, Void, List<String>> {
 
-public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
     private WeakReference<AppCompatActivity> actWeakRef;
 
-    public GetCountryListTask(AppCompatActivity act) {
+    public GetFilmTypesTask(AppCompatActivity act) {
         actWeakRef = new WeakReference<>(act);
     }
 
@@ -38,7 +38,7 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
             String server = actWeakRef.get().getApplicationContext().getResources().getString(R.string.server_url);
             builder.authority(server);
             builder.appendPath("dev");
-            builder.appendPath("countries_list");
+            builder.appendPath("film_types");
 
             try {
                 URL url = new URL(builder.build().toString());
@@ -57,17 +57,17 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
                     reader.close();
                     connection.disconnect();
 
-                    Log.d("lua", "Received countries: " + answer);
+                    Log.d("lua", "Received film types: " + answer);
 
                     answer = answer.substring(1, answer.length() - 1); // remove '[' at the beginning and ']' at the end
-                    List<String> countries = new ArrayList<>();
+                    List<String> filmTypes = new ArrayList<>();
                     String[] words = answer.split(",");
 
                     for (int i = 0; i < words.length; i++) {
-                        countries.add(words[i].trim());
+                        filmTypes.add(words[i].trim());
                     }
 
-                    return countries;
+                    return filmTypes;
                 }
                 else {
                     Log.d("lua", "Response code was NOT OK");
@@ -85,7 +85,7 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
     protected void onPostExecute(List<String> countries) {
         super.onPostExecute(countries);
         if (actWeakRef != null) {
-           // actWeakRef.get(); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
+            // actWeakRef.get(); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
         }
     }
 }
