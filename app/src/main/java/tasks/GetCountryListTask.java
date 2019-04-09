@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.dreammate.CreateProfileActivity;
 import com.dreammate.R;
 
 import java.io.InputStreamReader;
@@ -17,9 +18,9 @@ import java.util.Scanner;
 
 
 public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
-    private WeakReference<AppCompatActivity> actWeakRef;
+    private WeakReference<CreateProfileActivity> actWeakRef;
 
-    public GetCountryListTask(AppCompatActivity act) {
+    public GetCountryListTask(CreateProfileActivity act) {
         actWeakRef = new WeakReference<>(act);
     }
 
@@ -64,7 +65,8 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
                     String[] words = answer.split(",");
 
                     for (int i = 0; i < words.length; i++) {
-                        countries.add(words[i].trim());
+                        String clean = words[i].trim();
+                        countries.add(clean.substring(1, clean.length() - 1));
                     }
 
                     return countries;
@@ -85,7 +87,7 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
     protected void onPostExecute(List<String> countries) {
         super.onPostExecute(countries);
         if (actWeakRef != null) {
-           // actWeakRef.get(); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
+           actWeakRef.get().onCountriesResultComputed(countries); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
         }
     }
 }
