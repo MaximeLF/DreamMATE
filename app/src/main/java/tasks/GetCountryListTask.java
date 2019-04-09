@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
+
     private WeakReference<CreateProfileActivity> actWeakRef;
 
     public GetCountryListTask(CreateProfileActivity act) {

@@ -46,6 +46,7 @@ public class DashboardActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Button logout = (Button) findViewById(R.id.dashboardLogout);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +55,17 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+        });
+
+
+        Button continueRegistration = (Button) findViewById(R.id.dashboardContinueRegistration);
+
+        continueRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CreateProfileActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
