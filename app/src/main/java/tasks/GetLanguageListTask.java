@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.dreammate.CreateProfileActivity;
 import com.dreammate.R;
 
 import java.io.InputStreamReader;
@@ -16,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
 
-public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
-    private WeakReference<CreateProfileActivity> actWeakRef;
+    private WeakReference<AppCompatActivity> actWeakRef;
 
-    public GetCountryListTask(CreateProfileActivity act) {
+    public GetLanguageListTask(AppCompatActivity act) {
         actWeakRef = new WeakReference<>(act);
     }
 
@@ -39,7 +38,7 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
             String server = actWeakRef.get().getApplicationContext().getResources().getString(R.string.server_url);
             builder.authority(server);
             builder.appendPath("dev");
-            builder.appendPath("countries_list");
+            builder.appendPath("languages_list");
 
             try {
                 URL url = new URL(builder.build().toString());
@@ -58,18 +57,17 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
                     reader.close();
                     connection.disconnect();
 
-                    Log.d("lua", "Received countries: " + answer);
+                    Log.d("lua", "Received languages: " + answer);
 
                     answer = answer.substring(1, answer.length() - 1); // remove '[' at the beginning and ']' at the end
-                    List<String> countries = new ArrayList<>();
+                    List<String> languages = new ArrayList<>();
                     String[] words = answer.split(",");
 
                     for (int i = 0; i < words.length; i++) {
-                        String clean = words[i].trim();
-                        countries.add(clean.substring(1, clean.length() - 1));
+                        languages.add(words[i].trim());
                     }
 
-                    return countries;
+                    return languages;
                 }
                 else {
                     Log.d("lua", "Response code was NOT OK");
@@ -87,7 +85,7 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
     protected void onPostExecute(List<String> countries) {
         super.onPostExecute(countries);
         if (actWeakRef != null) {
-           actWeakRef.get().onCountriesResultComputed(countries); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
+            // actWeakRef.get(); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
         }
     }
 }
