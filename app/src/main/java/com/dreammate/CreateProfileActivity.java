@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tasks.GetCountryListTask;
+import tasks.GetFilmTypesTask;
 import tasks.GetLanguageListTask;
 
 public class CreateProfileActivity extends AppCompatActivity {
     List<String> countries = new ArrayList<String>();
     List<String> languages = new ArrayList<String>();
-    List<String> movies = new ArrayList<String>();
+    List<String> filmTypes = new ArrayList<String>();
 
     private MultiAutoCompleteTextView languagesEditText;
 
@@ -36,6 +37,9 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         languages.add("Loading country list");
         new GetLanguageListTask(this).execute();
+
+        filmTypes.add("Loading film types list");
+        new GetFilmTypesTask(this).execute();
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String id = sp.getString("user_id", "");
@@ -61,7 +65,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         languagesEditText.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
         moviesEditText = findViewById(R.id.moviesMultiAutoComplete);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, movies);
+        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
         moviesEditText.setAdapter(moviesAdapter);
         moviesEditText.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
@@ -73,6 +77,11 @@ public class CreateProfileActivity extends AppCompatActivity {
         AutoCompleteTextView contriesEditText = findViewById(R.id.countriesAutoComplete);
         ArrayAdapter<String> countriesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
         contriesEditText.setAdapter(countriesAdapter);
+
+    }
+
+    public void onCitiesResultComputed(List<String> cities)
+    {
 
     }
 
@@ -88,12 +97,10 @@ public class CreateProfileActivity extends AppCompatActivity {
 
     public void onFilmTypesResultComputed(List<String> result)
     {
-        movies = new ArrayList<>(result);
+        filmTypes = new ArrayList<>(result);
         moviesEditText = findViewById(R.id.moviesMultiAutoComplete);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, movies);
+        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
         moviesEditText.setAdapter(moviesAdapter);
         moviesEditText.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
     }
-
 }
