@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.dreammate.CreateProfileActivity;
 import com.dreammate.R;
 
 import java.io.InputStreamReader;
@@ -17,9 +18,9 @@ import java.util.Scanner;
 
 public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
 
-    private WeakReference<AppCompatActivity> actWeakRef;
+    private WeakReference<CreateProfileActivity> actWeakRef;
 
-    public GetLanguageListTask(AppCompatActivity act) {
+    public GetLanguageListTask(CreateProfileActivity act) {
         actWeakRef = new WeakReference<>(act);
     }
 
@@ -59,12 +60,13 @@ public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
 
                     Log.d("lua", "Received languages: " + answer);
 
-                    answer = answer.substring(1, answer.length() - 1); // remove '[' at the beginning and ']' at the end
+                    answer = answer.substring(2, answer.length() - 2); // remove '["' at the beginning and '"]' at the end
                     List<String> languages = new ArrayList<>();
-                    String[] words = answer.split(",");
+                    String[] words = answer.split("\",\"");
 
                     for (int i = 0; i < words.length; i++) {
-                        languages.add(words[i].trim());
+                        String clean = words[i].trim();
+                        languages.add(clean);
                     }
 
                     return languages;
@@ -82,10 +84,10 @@ public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
     }
 
     @Override
-    protected void onPostExecute(List<String> countries) {
-        super.onPostExecute(countries);
+    protected void onPostExecute(List<String> languages) {
+        super.onPostExecute(languages);
         if (actWeakRef != null) {
-            // actWeakRef.get(); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
+            actWeakRef.get().onLanguagesResultComputed(languages); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
         }
     }
 }

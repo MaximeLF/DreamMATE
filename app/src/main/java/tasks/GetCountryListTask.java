@@ -88,6 +88,8 @@ public class GetCountryListTask extends AsyncTask<Void, Void, List<String>> {
         super.onPostExecute(countries);
         if (actWeakRef != null) {
            actWeakRef.get().onCountriesResultComputed(countries); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
+
         }
+
     }
 }

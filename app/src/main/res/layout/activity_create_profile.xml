@@ -71,15 +71,60 @@
 
 
         <AutoCompleteTextView
-            android:id="@+id/languageAutoComplete"
+            android:id="@+id/countriesAutoComplete"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:completionThreshold="1"
             android:hint="@string/country_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileOriginCountry" />
+
+        <TextView
+            android:id="@+id/profileLanguages"
+            style="@style/headerTheme"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/languages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countriesAutoComplete" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/languagesMultiAutoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/language_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileLanguages" />
+
+        <TextView
+            android:id="@+id/profileMovies"
+            style="@style/headerTheme"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/movies"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/languagesMultiAutoComplete" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/moviesMultiAutoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/movie_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileMovies" />
 
 
     </android.support.constraint.ConstraintLayout>
