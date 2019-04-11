@@ -59,4 +59,14 @@
     <string name="select_date">Select date</string>
     <string name="budget_hint">€</string>
     <string name="select_move_in">Please select the move in date first!</string>
+    <string name="smoke">Do you smoke?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="finish">Finish</string>
+    <string name="occupation">What do you do for living?</string>
+    <string name="local_student">I\'m a local student</string>
+    <string name="international_student">I\'m a international student</string>
+    <string name="work">I Work</string>
+    <string name="finding">I\'m finding myself</string>
+
 </resources>
