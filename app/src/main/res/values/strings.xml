@@ -55,6 +55,8 @@
     <string name="wanted_city_hint">Select city</string>
     <string name="move_in_date">Move in date</string>
     <string name="move_out_date">Move out date</string>
-    <string name="budget">Whats the máx that you want to spend monthly</string>
+    <string name="budget">How much are you willing to pay monthly at most?</string>
+    <string name="select_date">Select date</string>
     <string name="budget_hint">€</string>
+    <string name="select_move_in">Please select the move in date first!</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.dreammate;
 
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,15 +13,20 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.santalu.maskedittext.MaskEditText;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import tasks.GetCitiesForCountryTask;
@@ -41,15 +47,16 @@ public class CreateProfileActivity extends AppCompatActivity
     private AutoCompleteTextView wantedCountryAutoComplete;
     private AutoCompleteTextView wantedCityAutoComplete;
     private MultiAutoCompleteTextView spokenLanguagesMultiAutoComplete;
-    private MultiAutoCompleteTextView filmTypesMultiAutoComplete;
 
-    private MaskEditText dateEditText;
+    private Button birthDateButton;
+    private Button moveInDateButton;
+    private Button moveOutDateButton;
 
-    private MaskEditText hourEditText;
+    private Date birthDate;
+    private Date moveInDate;
+    private Date moveOutDate;
 
-    private MaskEditText MoveInDateEditText;
-
-    private MaskEditText MoveOutDateEditText;
+    private Spinner sleepTimeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,18 +105,114 @@ public class CreateProfileActivity extends AppCompatActivity
 
 
 
-        dateEditText = findViewById(R.id.profileBirthdayDateEdit);
+        birthDateButton = findViewById(R.id.profileBirthdayDateButton);
+        moveInDateButton = findViewById(R.id.profileMoveInDateButton);
+        moveOutDateButton = findViewById(R.id.profileMoveOutDateButton);
 
-        hourEditText = findViewById(R.id.profileSleepTomeEdit);
 
-        MoveInDateEditText = findViewById(R.id.profileMoveInDateEdit);
+        birthDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int day, month, year;
+                Calendar calendar = Calendar.getInstance();
 
-        MoveOutDateEditText = findViewById(R.id.profileMoveOutDateEdit);
+                if (birthDate != null) {
+                    calendar = new GregorianCalendar();
+                    calendar.setTime(birthDate);
+                }
 
-        filmTypesMultiAutoComplete = findViewById(R.id.moviesMultiAutoComplete);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
-        filmTypesMultiAutoComplete.setAdapter(moviesAdapter);
-        filmTypesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+                month = calendar.get(Calendar.MONTH);
+                year = calendar.get(Calendar.YEAR);
+
+                // date picker dialog
+                DatePickerDialog picker = new DatePickerDialog(CreateProfileActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                Calendar cldr = Calendar.getInstance();
+                                cldr.set(year, monthOfYear, dayOfMonth, 0, 0);
+                                birthDate = cldr.getTime();
+                                birthDateButton.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                picker.show();
+            }
+        });
+
+        moveInDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int day, month, year;
+                Calendar calendar = Calendar.getInstance();
+
+                if (moveInDate != null) {
+                    calendar = new GregorianCalendar();
+                    calendar.setTime(moveInDate);
+                }
+
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+                month = calendar.get(Calendar.MONTH);
+                year = calendar.get(Calendar.YEAR);
+
+                // date picker dialog
+                DatePickerDialog picker = new DatePickerDialog(CreateProfileActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                Calendar cldr = Calendar.getInstance();
+                                cldr.set(year, monthOfYear, dayOfMonth, 0, 0);
+                                moveInDate = cldr.getTime();
+                                moveInDateButton.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.getDatePicker().setMinDate(System.currentTimeMillis());
+                picker.show();
+            }
+        });
+
+        moveOutDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (moveInDate == null) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.select_move_in), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int day, month, year;
+
+                Calendar calendar = new GregorianCalendar();
+
+                if (moveOutDate == null) {
+                    calendar.setTime(moveInDate);
+                }
+                else {
+                    calendar.setTime(moveOutDate);
+                }
+
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+                month = calendar.get(Calendar.MONTH);
+                year = calendar.get(Calendar.YEAR);
+
+                // date picker dialog
+                DatePickerDialog picker = new DatePickerDialog(CreateProfileActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                Calendar cldr = Calendar.getInstance();
+                                cldr.set(year, monthOfYear, dayOfMonth, 0, 0);
+                                moveOutDate = cldr.getTime();
+                                moveOutDateButton.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.getDatePicker().setMinDate(moveInDate.getTime());
+                picker.show();
+            }
+        });
+
+        sleepTimeSpinner = findViewById(R.id.profileSleepTimeEdit);
 
     }
 
@@ -157,16 +260,5 @@ public class CreateProfileActivity extends AppCompatActivity
     public void onFilmTypesResultComputed(List<String> result)
     {
         filmTypes = new ArrayList<>(result);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
-        filmTypesMultiAutoComplete.setAdapter(moviesAdapter);
-        filmTypesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
-
-    //public void dateShowText(View v)
-    //{
-    //    Toast.makeText(this, dateEditText.getText(), Toast.LENGTH_SHORT).show();
-
-    //}
-
-    //public void hourShowText()
 }

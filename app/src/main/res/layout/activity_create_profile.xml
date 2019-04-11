@@ -30,7 +30,6 @@
         <TextView
             android:id="@+id/profileDescription"
             style="@style/headerTheme"
-
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -40,10 +39,13 @@
             app:layout_constraintTop_toBottomOf="@id/profileLogo" />
 
 
+
+
+
+
         <TextView
             android:id="@+id/profileBirthdayDate"
             style="@style/textTheme"
-
             android:layout_width="142dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="56dp"
@@ -51,18 +53,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileDescription" />
 
-        <com.santalu.maskedittext.MaskEditText
-            android:id="@+id/profileBirthdayDateEdit"
-            style="@style/editTheme"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/profileBirthdayDateButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:hint="@string/date_hint"
-            android:inputType="date"
+            android:text="@string/select_date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDate"
-            app:met_mask="##/##/####" />
+            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDate"/>
+
+
+
+
+
 
         <TextView
             android:id="@+id/profileGender"
@@ -73,7 +78,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/gender"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDateEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDateButton" />
 
         <RadioGroup
             android:id="@+id/genderRadioGroup"
@@ -106,6 +111,9 @@
         </RadioGroup>
 
 
+
+
+
         <TextView
             android:id="@+id/profileOriginCountries"
             style="@style/textTheme"
@@ -128,6 +136,10 @@
             android:hint="@string/origin_countries_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileOriginCountries" />
+
+
+
+
 
         <TextView
             android:id="@+id/profileLanguages"
@@ -153,6 +165,9 @@
             app:layout_constraintTop_toBottomOf="@+id/profileLanguages" />
 
 
+
+
+
         <TextView
             android:id="@+id/wantedCountryText"
             style="@style/textTheme"
@@ -163,7 +178,6 @@
             android:text="@string/wanted_country"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spokenLanguagesMultiAutoComplete" />
-
 
         <AutoCompleteTextView
             android:id="@+id/wantedCountryAutoComplete"
@@ -176,6 +190,10 @@
             android:hint="@string/wanted_country_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wantedCountryText" />
+
+
+
+
 
 
         <TextView
@@ -200,8 +218,11 @@
             app:layout_constraintTop_toBottomOf="@+id/wantedCityText" />
 
 
+
+
+
         <TextView
-            android:id="@+id/profileMovInDate"
+            android:id="@+id/profileMoveInDate"
             style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -209,23 +230,27 @@
             android:layout_marginTop="8dp"
             android:text="@string/move_in_date"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/profileMoveOutDate"
             app:layout_constraintTop_toBottomOf="@+id/wantedCityAutoComplete" />
 
-        <com.santalu.maskedittext.MaskEditText
-            android:id="@+id/profileMoveInDateEdit"
-            style="@style/editTheme"
+        <Button
+            android:id="@+id/profileMoveInDateButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:hint="@string/date_hint"
-            android:inputType="date"
+            android:text="@string/select_date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileMovInDate"
-            app:met_mask="##/##/####" />
+            app:layout_constraintEnd_toStartOf="@id/profileMoveOutDateButton"
+            app:layout_constraintTop_toBottomOf="@+id/profileMoveInDate" />
+
+
+
+
 
         <TextView
-            android:id="@+id/profileMovOutDate"
+            android:id="@+id/profileMoveOutDate"
             style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -234,20 +259,22 @@
             android:layout_marginEnd="8dp"
             android:text="@string/move_out_date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/profileMovInDate"
+            app:layout_constraintStart_toEndOf="@+id/profileMoveInDate"
             app:layout_constraintTop_toBottomOf="@+id/wantedCityAutoComplete" />
 
-        <com.santalu.maskedittext.MaskEditText
-            android:id="@+id/profileMoveOutDateEdit"
-            style="@style/editTheme"
+        <Button
+            android:id="@+id/profileMoveOutDateButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="@string/date_hint"
-            android:inputType="date"
-            app:layout_constraintStart_toStartOf="@+id/profileMovOutDate"
-            app:layout_constraintTop_toBottomOf="@+id/profileMovOutDate"
-            app:met_mask="##/##/####" />
+            android:text="@string/select_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileMoveInDate"
+            app:layout_constraintTop_toBottomOf="@+id/profileMoveOutDate" />
+
+
+
 
 
         <TextView
@@ -259,7 +286,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/budget"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileMoveInDateEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/profileMoveOutDateButton" />
 
         <EditText
             android:id="@+id/profileBudgetEdit"
@@ -272,6 +299,7 @@
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBudget" />
+
 
         
 
@@ -286,8 +314,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBudgetEdit" />
 
-        <com.santalu.maskedittext.MaskEditText
-            android:id="@+id/profileSleepTomeEdit"
+        <Spinner
+            android:id="@+id/profileSleepTimeEdit"
             style="@style/editTheme"
             android:layout_width="286dp"
             android:layout_height="wrap_content"
@@ -296,8 +324,7 @@
             android:hint="@string/sleep_time_hint"
             android:inputType="time"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileSleepTime"
-            app:met_mask="##:##" />
+            app:layout_constraintTop_toBottomOf="@+id/profileSleepTime"/>
 
 
     </android.support.constraint.ConstraintLayout>
