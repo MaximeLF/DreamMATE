@@ -12,8 +12,11 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +36,6 @@ public class CreateProfileActivity extends AppCompatActivity
     CreateProfileActivity thisActivity = this;
     List<String> countries = new ArrayList<String>();
     List<String> languages = new ArrayList<String>();
-    List<String> filmTypes = new ArrayList<String>();
     List<String> cities = new ArrayList<String>();
 
 
@@ -41,29 +43,33 @@ public class CreateProfileActivity extends AppCompatActivity
     private AutoCompleteTextView wantedCountryAutoComplete;
     private AutoCompleteTextView wantedCityAutoComplete;
     private MultiAutoCompleteTextView spokenLanguagesMultiAutoComplete;
-    private MultiAutoCompleteTextView filmTypesMultiAutoComplete;
 
     private MaskEditText dateEditText;
-
     private MaskEditText hourEditText;
-
     private MaskEditText MoveInDateEditText;
-
     private MaskEditText MoveOutDateEditText;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
 
+        Button finish = (Button) findViewById(R.id.finishButton);
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                startCreateProfile();
+            }
+        });
+
         countries.add("Loading country list");
         new GetCountryListTask(this).execute();
 
         languages.add("Loading language list");
         new GetLanguageListTask(this).execute();
-
-        filmTypes.add("Loading film types list");
-        new GetFilmTypesTask(this).execute();
 
         cities.add("Select a country first!");
 
@@ -105,11 +111,6 @@ public class CreateProfileActivity extends AppCompatActivity
         MoveInDateEditText = findViewById(R.id.profileMoveInDateEdit);
 
         MoveOutDateEditText = findViewById(R.id.profileMoveOutDateEdit);
-
-        filmTypesMultiAutoComplete = findViewById(R.id.moviesMultiAutoComplete);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
-        filmTypesMultiAutoComplete.setAdapter(moviesAdapter);
-        filmTypesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
     }
 
@@ -154,19 +155,47 @@ public class CreateProfileActivity extends AppCompatActivity
         spokenLanguagesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 
-    public void onFilmTypesResultComputed(List<String> result)
+    public void startCreateProfile()
     {
-        filmTypes = new ArrayList<>(result);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
-        filmTypesMultiAutoComplete.setAdapter(moviesAdapter);
-        filmTypesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        String dateOfBirth = ((EditText)findViewById(R.id.profileBirthdayDateEdit)).getText().toString();
+
+        RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
+        int genderRadioButtonId = genderRadioGroup.getCheckedRadioButtonId();
+        View genderRadioButton = genderRadioGroup.findViewById(genderRadioButtonId);
+        int genderIdx = genderRadioGroup.indexOfChild(genderRadioButton);
+        RadioButton genderRadio = (RadioButton) genderRadioGroup.getChildAt(genderIdx);
+        String gender = genderRadio.getText().toString();
+
+        String originCountries = originCountriesMultiAutoComplete.getText().toString().trim();
+        String[] singleOriginCountries = originCountries.split("\\s*,\\s*");
+
+        String languages = spokenLanguagesMultiAutoComplete.getText().toString().trim();
+        String[] singleLanguages = languages.split("\\s*,\\s*");
+
+        String wantedCountry = ((EditText)findViewById(R.id.wantedCountryAutoComplete)).getText().toString();
+
+        String wantedCity = ((EditText)findViewById(R.id.wantedCityAutoComplete)).getText().toString();
+
+        int budget = Integer.parseInt(((EditText)findViewById(R.id.profileBudgetEdit)).getText().toString());
+
+        RadioGroup smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
+        int smokerRadioButtonId = smokerRadioGroup.getCheckedRadioButtonId();
+        View smokerRadioButton = smokerRadioGroup.findViewById(smokerRadioButtonId);
+        int smokerIdx = smokerRadioGroup.indexOfChild(smokerRadioButton);
+        RadioButton smokerRadio = (RadioButton) smokerRadioGroup.getChildAt(smokerIdx);
+        String smoker = smokerRadio.getText().toString();
+
+        RadioGroup occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
+        int occupationRadioButtonId = occupationRadioGroup.getCheckedRadioButtonId();
+        View occupationRadioButton = occupationRadioGroup.findViewById(occupationRadioButtonId);
+        int occupationIdx = occupationRadioGroup.indexOfChild(occupationRadioButton);
+        RadioButton occupationRadio = (RadioButton) occupationRadioGroup.getChildAt(occupationIdx);
+        String occupation = occupationRadio.getText().toString();
+
+
+
+
+        Log.d("teresa", gender + " " + dateOfBirth + " " + budget);
     }
 
-    //public void dateShowText(View v)
-    //{
-    //    Toast.makeText(this, dateEditText.getText(), Toast.LENGTH_SHORT).show();
-
-    //}
-
-    //public void hourShowText()
 }

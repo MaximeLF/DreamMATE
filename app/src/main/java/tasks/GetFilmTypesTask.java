@@ -87,7 +87,7 @@ public class GetFilmTypesTask extends AsyncTask<Void, Void, List<String>> {
     protected void onPostExecute(List<String> movies) {
         super.onPostExecute(movies);
         if (actWeakRef != null) {
-             actWeakRef.get().onFilmTypesResultComputed(movies); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
+             //actWeakRef.get().onFilmTypesResultComputed(movies); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
         }
     }
 }

@@ -64,6 +64,8 @@
             app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDate"
             app:met_mask="##/##/####" />
 
+
+
         <TextView
             android:id="@+id/profileGender"
             style="@style/textTheme"
@@ -102,7 +104,7 @@
                 style="@style/editTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/male" />
+                android:text="@string/other" />
         </RadioGroup>
 
 
@@ -273,7 +275,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBudget" />
 
-        
+
 
         <TextView
             android:id="@+id/profileSleepTime"
@@ -298,6 +300,106 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileSleepTime"
             app:met_mask="##:##" />
+
+        <TextView
+            android:id="@+id/profileSmoke"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/smoke"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileSleepTomeEdit" />
+
+        <RadioGroup
+            android:id="@+id/smokeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileSmoke">
+
+            <RadioButton
+                android:id="@+id/radio_yes"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/radio_no"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/finishButton"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="@string/finish"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/occupationRadioGroup" />
+
+        <TextView
+            android:id="@+id/profileOccupation"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/occupation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/smokeRadioGroup" />
+
+        <RadioGroup
+            android:id="@+id/occupationRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileOccupation"
+            tools:layout_editor_absoluteY="0dp">
+
+            <RadioButton
+                android:id="@+id/radio_lStudent"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/local_student" />
+
+            <RadioButton
+                android:id="@+id/radio_iStudent"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/international_student" />
+
+            <RadioButton
+                android:id="@+id/radio_work"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/work" />
+
+            <RadioButton
+                android:id="@+id/radio_life"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finding" />
+
+        </RadioGroup>
 
 
     </android.support.constraint.ConstraintLayout>
