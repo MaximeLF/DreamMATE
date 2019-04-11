@@ -35,8 +35,8 @@ public class User {
     @SerializedName("gender")
     public String gender;
 
-    @SerializedName("origin_country")
-    public String originCountry;
+    @SerializedName("origin_countries")
+    public List<String> originCountries;
 
     @SerializedName("languages_spoken")
     public List<String> languagesSpoken;

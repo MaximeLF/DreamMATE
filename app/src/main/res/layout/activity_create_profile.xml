@@ -13,6 +13,7 @@
         android:layout_height="wrap_content">
 
 
+
         <ImageView
             android:id="@+id/profileLogo"
             android:layout_width="wrap_content"
@@ -27,74 +28,144 @@
         <TextView
             android:id="@+id/profileDescription"
             style="@style/headerTheme"
-
             android:layout_marginTop="8dp"
             android:text="@string/tell_us_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.605"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileLogo" />
+            app:layout_constraintTop_toBottomOf="@id/profileLogo" />
+
+
 
         <TextView
             android:id="@+id/profileGender"
-            style="@style/headerTheme"
-
+            style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/gender"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileDescription" />
+            app:layout_constraintTop_toBottomOf="@id/profileDescription" />
 
-        <Spinner
-            android:id="@+id/genderSpinner"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/genderRadioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileGender" />
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/profileGender">
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/radio_male"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"/>
+            <RadioButton
+                android:id="@+id/radio_other"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"/>
+        </RadioGroup>
+
+
 
         <TextView
-            android:id="@+id/profileOriginCountry"
-            style="@style/headerTheme"
-
+            android:id="@+id/profileOriginCountries"
+            style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/origin_country"
+            android:text="@string/origin_countries"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genderSpinner" />
+            app:layout_constraintTop_toBottomOf="@id/genderRadioGroup" />
 
-
-        <AutoCompleteTextView
-            android:id="@+id/countriesAutoComplete"
+        <MultiAutoCompleteTextView
+            android:id="@+id/originCountriesMultiAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:completionThreshold="1"
-            android:hint="@string/country_hint"
+            android:hint="@string/origin_countries_hint"
+            style="@style/editTheme"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileOriginCountry" />
+            app:layout_constraintTop_toBottomOf="@id/profileOriginCountries" />
+
+
+
+        <TextView
+            android:id="@+id/wantedCountryText"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/wanted_country"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/originCountriesMultiAutoComplete"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/wantedCountryAutoComplete"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/wanted_country_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wantedCountryText"/>
+
+
+
+
+        <TextView
+            android:id="@+id/wantedCityText"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/wanted_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wantedCountryAutoComplete"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/wantedCityAutoComplete"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/wanted_city_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wantedCityText"/>
+
+
+
 
         <TextView
             android:id="@+id/profileLanguages"
-            style="@style/headerTheme"
-
+            style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/languages"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/countriesAutoComplete" />
+            app:layout_constraintTop_toBottomOf="@+id/wantedCityAutoComplete" />
 
         <MultiAutoCompleteTextView
-            android:id="@+id/languagesMultiAutoComplete"
+            android:id="@+id/spokenLanguagesMultiAutoComplete"
+            style="@style/editTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -104,20 +175,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileLanguages" />
 
+
+
         <TextView
             android:id="@+id/profileMovies"
-            style="@style/headerTheme"
-
+            style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/movies"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/languagesMultiAutoComplete" />
+            app:layout_constraintTop_toBottomOf="@+id/spokenLanguagesMultiAutoComplete" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/moviesMultiAutoComplete"
+            style="@style/editTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -125,6 +198,9 @@
             android:hint="@string/movie_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileMovies" />
+
+
+
 
 
     </android.support.constraint.ConstraintLayout>

@@ -33,14 +33,18 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name="gender">Gender</string>
+    <string name="gender">Which is your gender?</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="other">Other</string>
-    <string name="origin_country">Origin country</string>
-    <string name="country_hint">Select your country</string>
-    <string name="languages">Languages spoken</string>
-    <string name="language_hint">Select the languages that you speak</string>
-    <string name="movies">Movies types</string>
-    <string name="movie_hint">Select the type of movies you like</string>
+    <string name="origin_countries">Which countries do you come from?</string>
+    <string name="origin_countries_hint">Select countries</string>
+    <string name="languages">Which languages can you speak?</string>
+    <string name="language_hint">Select languages</string>
+    <string name="movies">Which kinds of movies do you like?</string>
+    <string name="movie_hint">Select types of movies</string>
+    <string name="wanted_country">In which country are you looking for a flat?</string>
+    <string name="wanted_country_hint">Select country</string>
+    <string name="wanted_city">And in which city?</string>
+    <string name="wanted_city_hint">Select city</string>
 </resources>
