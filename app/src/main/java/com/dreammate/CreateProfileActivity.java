@@ -1,11 +1,13 @@
 package com.dreammate;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,7 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,6 +29,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import model.User;
 import tasks.GetCitiesForCountryTask;
 import tasks.GetCountryListTask;
 import tasks.GetFilmTypesTask;
@@ -78,18 +82,11 @@ public class CreateProfileActivity extends AppCompatActivity
         cities.add("Select a country first!");
 
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String id = sp.getString("user_id", "");
-        String firstName = sp.getString("first_name", "");
-        String lastName = sp.getString("last_name", "");
-
-
 
         originCountriesMultiAutoComplete = findViewById(R.id.originCountriesMultiAutoComplete);
         ArrayAdapter<String> originCountriesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
         originCountriesMultiAutoComplete.setAdapter(originCountriesAdapter);
         originCountriesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
 
         wantedCountryAutoComplete = findViewById(R.id.wantedCountryAutoComplete);
         ArrayAdapter<String> wantedCountryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
@@ -215,8 +212,6 @@ public class CreateProfileActivity extends AppCompatActivity
             }
         });
 
-        sleepTimeSpinner = findViewById(R.id.profileSleepTimeEdit);
-
     }
 
     public void onCountriesResultComputed(List<String> result)
@@ -262,6 +257,27 @@ public class CreateProfileActivity extends AppCompatActivity
 
     public void startCreateProfile()
     {
+        User user = new User();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String id = sp.getString("user_id", "");
+        String firstName = sp.getString("first_name", "");
+        String lastName = sp.getString("last_name", "");
+
+        user.id = id;
+        user.firstName = firstName;
+        user.lastName = lastName;
+
+
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(birthDate);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        String birthDateString = year + "-" + month + "-" + day;
+
+        user.birthDate = birthDateString;
+
 
         RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
         int genderRadioButtonId = genderRadioGroup.getCheckedRadioButtonId();
@@ -270,17 +286,46 @@ public class CreateProfileActivity extends AppCompatActivity
         RadioButton genderRadio = (RadioButton) genderRadioGroup.getChildAt(genderIdx);
         String gender = genderRadio.getText().toString();
 
+        user.gender = gender;
+
+
+        RadioGroup sleepTimeRadioGroup = findViewById(R.id.profileSleepTimeRadioGroup);
+        int sleepTimeRadioButtonId = sleepTimeRadioGroup.getCheckedRadioButtonId();
+        View sleepTimeRadioButton = sleepTimeRadioGroup.findViewById(sleepTimeRadioButtonId);
+        int sleepTimeIdx = sleepTimeRadioGroup.indexOfChild(sleepTimeRadioButton);
+        RadioButton sleepTimeRadio = (RadioButton) sleepTimeRadioGroup.getChildAt(sleepTimeIdx);
+        String sleepTime = sleepTimeRadio.getText().toString();
+
+        user.sleepTime = sleepTime;
+
+
+        user.originCountries = new ArrayList<>();
         String originCountries = originCountriesMultiAutoComplete.getText().toString().trim();
         String[] singleOriginCountries = originCountries.split("\\s*,\\s*");
+        for (int i = 0; i < singleOriginCountries.length; i++) {
+            user.originCountries.add(singleOriginCountries[i].trim());
+        }
 
+
+        user.languagesSpoken = new ArrayList<>();
         String languages = spokenLanguagesMultiAutoComplete.getText().toString().trim();
         String[] singleLanguages = languages.split("\\s*,\\s*");
+        for (int i = 0; i < singleLanguages.length; i++) {
+            user.languagesSpoken.add(singleLanguages[i].trim());
+        }
+
 
         String wantedCountry = ((EditText)findViewById(R.id.wantedCountryAutoComplete)).getText().toString();
+        user.stayingCountry = wantedCountry;
+
 
         String wantedCity = ((EditText)findViewById(R.id.wantedCityAutoComplete)).getText().toString();
+        user.stayingCity = wantedCity;
+
 
         int budget = Integer.parseInt(((EditText)findViewById(R.id.profileBudgetEdit)).getText().toString());
+        user.maxBudget = budget;
+
 
         RadioGroup smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
         int smokerRadioButtonId = smokerRadioGroup.getCheckedRadioButtonId();
@@ -289,6 +334,9 @@ public class CreateProfileActivity extends AppCompatActivity
         RadioButton smokerRadio = (RadioButton) smokerRadioGroup.getChildAt(smokerIdx);
         String smoker = smokerRadio.getText().toString();
 
+        user.smokes = smoker.equals(getString(R.string.yes));
+
+
         RadioGroup occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
         int occupationRadioButtonId = occupationRadioGroup.getCheckedRadioButtonId();
         View occupationRadioButton = occupationRadioGroup.findViewById(occupationRadioButtonId);
@@ -296,9 +344,29 @@ public class CreateProfileActivity extends AppCompatActivity
         RadioButton occupationRadio = (RadioButton) occupationRadioGroup.getChildAt(occupationIdx);
         String occupation = occupationRadio.getText().toString();
 
+        user.occupation = occupation;
+
+
+        String description = ((EditText) findViewById(R.id.profileDescriptionEdit)).getText().toString();
+        user.description = description;
+
+
+        // call task to send user to server
+    }
 
 
 
-        // Log.d("teresa", gender + " " + dateOfBirth + " " + budget);
+
+    public void onUserInfoSent(Boolean worked) {
+        if (worked) {
+            Toast.makeText(getApplicationContext(), getString(R.string.user_info_success), Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(getApplicationContext(), getString(R.string.user_info_failure), Toast.LENGTH_SHORT).show();
+        }
     }
 }

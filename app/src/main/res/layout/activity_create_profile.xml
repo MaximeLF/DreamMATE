@@ -28,7 +28,7 @@
 
 
         <TextView
-            android:id="@+id/profileDescription"
+            android:id="@+id/profileTellUsMore"
             style="@style/headerTheme"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -43,6 +43,13 @@
 
 
 
+
+
+
+
+
+
+
         <TextView
             android:id="@+id/profileBirthdayDate"
             style="@style/textTheme"
@@ -51,7 +58,7 @@
             android:layout_marginTop="56dp"
             android:text="@string/date_of_birth"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/profileTellUsMore" />
 
         <Button
             android:id="@+id/profileBirthdayDateButton"
@@ -63,6 +70,10 @@
             android:text="@string/select_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDate"/>
+
+
+
+
 
 
 
@@ -116,6 +127,13 @@
 
 
 
+
+
+
+
+
+
+
         <TextView
             android:id="@+id/profileOriginCountries"
             style="@style/textTheme"
@@ -136,8 +154,15 @@
             android:layout_marginTop="8dp"
             android:completionThreshold="1"
             android:hint="@string/origin_countries_hint"
+            android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileOriginCountries" />
+
+
+
+
+
+
 
 
 
@@ -163,8 +188,16 @@
             android:layout_marginTop="8dp"
             android:completionThreshold="1"
             android:hint="@string/language_hint"
+            android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileLanguages" />
+
+
+
+
+
+
+
 
 
 
@@ -190,8 +223,15 @@
             android:layout_marginTop="8dp"
             android:completionThreshold="1"
             android:hint="@string/wanted_country_hint"
+            android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wantedCountryText" />
+
+
+
+
+
+
 
 
 
@@ -216,8 +256,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:hint="@string/wanted_city_hint"
+            android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wantedCityText" />
+
+
+
+
+
+
 
 
 
@@ -251,6 +299,14 @@
 
 
 
+
+
+
+
+
+
+
+
         <TextView
             android:id="@+id/profileMoveOutDate"
             style="@style/textTheme"
@@ -279,6 +335,13 @@
 
 
 
+
+
+
+
+
+
+
         <TextView
             android:id="@+id/profileBudget"
             style="@style/textTheme"
@@ -293,7 +356,7 @@
         <EditText
             android:id="@+id/profileBudgetEdit"
             style="@style/editTheme"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -301,6 +364,26 @@
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBudget" />
+
+        <TextView
+            android:id="@+id/profileBudgetEuro"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/euro"
+            app:layout_constraintStart_toEndOf="@id/profileBudgetEdit"
+            app:layout_constraintTop_toBottomOf="@id/profileBudget"/>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -315,17 +398,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBudgetEdit" />
 
-        <Spinner
-            android:id="@+id/profileSleepTimeEdit"
-            style="@style/editTheme"
-            android:layout_width="286dp"
+        <RadioGroup
+            android:id="@+id/profileSleepTimeRadioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:hint="@string/sleep_time_hint"
-            android:inputType="time"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileSleepTime"/>
+            app:layout_constraintTop_toBottomOf="@+id/profileSleepTime">
+
+            <RadioButton
+                android:id="@+id/radio_9_10"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/radio_9_10" />
+
+            <RadioButton
+                android:id="@+id/radio_10_12"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_10_12" />
+
+            <RadioButton
+                android:id="@+id/radio_12_plus"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_12_plus" />
+
+        </RadioGroup>
+
+
+
+
+
+
+
+
+
+
+
 
         <TextView
             android:id="@+id/profileSmoke"
@@ -336,7 +452,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/smoke"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileSleepTimeEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/profileSleepTimeRadioGroup" />
 
         <RadioGroup
             android:id="@+id/smokeRadioGroup"
@@ -365,16 +481,15 @@
 
         </RadioGroup>
 
-        <Button
-            android:id="@+id/finishButton"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="@string/finish"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/occupationRadioGroup" />
+
+
+
+
+
+
+
+
+
 
         <TextView
             android:id="@+id/profileOccupation"
@@ -424,8 +539,66 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/finding" />
-
         </RadioGroup>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileDescription"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/occupationRadioGroup" />
+
+        <EditText
+            android:id="@+id/profileDescriptionEdit"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/description_hint"
+            android:inputType="textMultiLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileDescription" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <Button
+            android:id="@+id/finishButton"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/finish"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileDescriptionEdit" />
 
 
     </android.support.constraint.ConstraintLayout>
