@@ -43,4 +43,9 @@
     <string name="language_hint">Select the languages that you speak</string>
     <string name="movies">Movies types</string>
     <string name="movie_hint">Select the type of movies you like</string>
+    <string name="birthday_date">Birthday date</string>
+    <string name="birthday_date_hint">dd/mm/yyyy</string>
+    <string name="sleep_time">At what time do you usually go to sleep</string>
+    <string name="sleep_time_hint">hh:mm</string>
+
 </resources>

@@ -18,22 +18,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/dreammate_logo" />
+
 
         <TextView
             android:id="@+id/profileDescription"
             style="@style/headerTheme"
 
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/tell_us_more"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileLogo" />
+
+        <TextView
+            android:id="@+id/profileBirthdayDate"
+            style="@style/headerTheme"
+
+            android:layout_width="142dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/birthday_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genderSpinner" />
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/profileBirthdayDateEdit"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:inputType="date"
+            android:hint="@string/birthday_date_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDate"
+            app:met_mask="##/##/####" />
 
         <TextView
             android:id="@+id/profileGender"
@@ -41,7 +69,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
             android:text="@string/gender"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileDescription" />
@@ -62,12 +91,12 @@
             style="@style/headerTheme"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/origin_country"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genderSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDateEdit" />
 
 
         <AutoCompleteTextView
@@ -75,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:completionThreshold="1"
             android:hint="@string/country_hint"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,15 +145,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/languagesMultiAutoComplete" />
 
-        <MultiAutoCompleteTextView
-            android:id="@+id/moviesMultiAutoComplete"
+        <TextView
+            android:id="@+id/profileSleepTime"
+            style="@style/headerTheme"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/sleep_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileMovies" />
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/profileSleepTomeEdit"
+            style="@style/editTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:completionThreshold="1"
-            android:hint="@string/movie_hint"
+            android:layout_marginTop="8dp"
+            android:hint="@string/sleep_time_hint"
+            android:inputType="time"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileMovies" />
+            app:layout_constraintTop_toBottomOf="@+id/profileSleepTime"
+            app:met_mask="##:##" />
 
 
     </android.support.constraint.ConstraintLayout>

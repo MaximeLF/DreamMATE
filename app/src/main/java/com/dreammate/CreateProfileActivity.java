@@ -4,12 +4,19 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.santalu.maskedittext.MaskEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +33,10 @@ public class CreateProfileActivity extends AppCompatActivity {
     private MultiAutoCompleteTextView languagesEditText;
 
     private MultiAutoCompleteTextView moviesEditText;
+
+    private MaskEditText dateEditText;
+
+    private MaskEditText hourEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +75,9 @@ public class CreateProfileActivity extends AppCompatActivity {
         languagesEditText.setAdapter(languagesAdapter);
         languagesEditText.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-        moviesEditText = findViewById(R.id.moviesMultiAutoComplete);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
-        moviesEditText.setAdapter(moviesAdapter);
-        moviesEditText.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        dateEditText = findViewById(R.id.profileBirthdayDateEdit);
+
+        hourEditText = findViewById(R.id.profileSleepTomeEdit);
 
     }
 
@@ -98,9 +108,14 @@ public class CreateProfileActivity extends AppCompatActivity {
     public void onFilmTypesResultComputed(List<String> result)
     {
         filmTypes = new ArrayList<>(result);
-        moviesEditText = findViewById(R.id.moviesMultiAutoComplete);
-        ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
-        moviesEditText.setAdapter(moviesAdapter);
-        moviesEditText.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
     }
+
+    //public void dateShowText(View v)
+    //{
+    //    Toast.makeText(this, dateEditText.getText(), Toast.LENGTH_SHORT).show();
+
+    //}
+
+    //public void hourShowText()
 }
