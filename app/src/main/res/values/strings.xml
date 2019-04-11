@@ -41,11 +41,10 @@
     <string name="country_hint">Select your country</string>
     <string name="movies">Which kinds of movies do you like?</string>
     <string name="movie_hint">Select types of movies</string>
-    <string name="birthday_date">Birthday date</string>
-    <string name="birthday_date_hint">dd/mm/yyyy</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="date_hint">dd/mm/yyyy</string>
     <string name="sleep_time">At what time do you usually go to sleep</string>
     <string name="sleep_time_hint">hh:mm</string>
-
     <string name="origin_countries">Which countries do you come from?</string>
     <string name="origin_countries_hint">Select countries</string>
     <string name="languages">Which languages can you speak?</string>
@@ -54,4 +53,8 @@
     <string name="wanted_country_hint">Select country</string>
     <string name="wanted_city">And in which city?</string>
     <string name="wanted_city_hint">Select city</string>
+    <string name="move_in_date">Move in date</string>
+    <string name="move_out_date">Move out date</string>
+    <string name="budget">Whats the máx that you want to spend monthly</string>
+    <string name="budget_hint">€</string>
 </resources>

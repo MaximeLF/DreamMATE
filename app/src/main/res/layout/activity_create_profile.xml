@@ -13,7 +13,6 @@
         android:layout_height="wrap_content">
 
 
-
         <ImageView
             android:id="@+id/profileLogo"
             android:layout_width="wrap_content"
@@ -47,10 +46,10 @@
 
             android:layout_width="142dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/birthday_date"
+            android:layout_marginTop="56dp"
+            android:text="@string/date_of_birth"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/moviesMultiAutoComplete" />
+            app:layout_constraintTop_toBottomOf="@+id/profileDescription" />
 
         <com.santalu.maskedittext.MaskEditText
             android:id="@+id/profileBirthdayDateEdit"
@@ -59,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:hint="@string/birthday_date_hint"
+            android:hint="@string/date_hint"
             android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDate"
@@ -71,10 +70,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:text="@string/gender"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDateEdit" />
 
         <RadioGroup
             android:id="@+id/genderRadioGroup"
@@ -88,22 +87,23 @@
                 style="@style/editTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/female"
-                android:checked="true"/>
+                android:checked="true"
+                android:text="@string/female" />
+
             <RadioButton
                 android:id="@+id/radio_male"
                 style="@style/editTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/male"/>
+                android:text="@string/male" />
+
             <RadioButton
                 android:id="@+id/radio_other"
                 style="@style/editTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/male"/>
+                android:text="@string/male" />
         </RadioGroup>
-
 
 
         <TextView
@@ -129,6 +129,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileOriginCountries" />
 
+        <TextView
+            android:id="@+id/profileLanguages"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/languages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/originCountriesMultiAutoComplete" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/spokenLanguagesMultiAutoComplete"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/language_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileLanguages" />
+
 
         <TextView
             android:id="@+id/wantedCountryText"
@@ -136,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="28dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="76dp"
             android:text="@string/wanted_country"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spokenLanguagesMultiAutoComplete" />
@@ -176,50 +199,81 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wantedCityText" />
 
+
         <TextView
-            android:id="@+id/profileLanguages"
+            android:id="@+id/profileMovInDate"
             style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/languages"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/originCountriesMultiAutoComplete" />
-
-        <MultiAutoCompleteTextView
-            android:id="@+id/spokenLanguagesMultiAutoComplete"
-            style="@style/editTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:completionThreshold="1"
-            android:hint="@string/language_hint"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileLanguages" />
-
-
-        <TextView
-            android:id="@+id/profileMovies"
-            style="@style/textTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/movies"
+            android:text="@string/move_in_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wantedCityAutoComplete" />
 
-
-        <MultiAutoCompleteTextView
-            android:id="@+id/moviesMultiAutoComplete"
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/profileMoveInDateEdit"
             style="@style/editTheme"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:hint="@string/date_hint"
+            android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileMovies"/>
+            app:layout_constraintTop_toBottomOf="@+id/profileMovInDate"
+            app:met_mask="##/##/####" />
+
+        <TextView
+            android:id="@+id/profileMovOutDate"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/move_out_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileMovInDate"
+            app:layout_constraintTop_toBottomOf="@+id/wantedCityAutoComplete" />
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/profileMoveOutDateEdit"
+            style="@style/editTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/date_hint"
+            android:inputType="date"
+            app:layout_constraintStart_toStartOf="@+id/profileMovOutDate"
+            app:layout_constraintTop_toBottomOf="@+id/profileMovOutDate"
+            app:met_mask="##/##/####" />
+
+
+        <TextView
+            android:id="@+id/profileBudget"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/budget"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileMoveInDateEdit" />
+
+        <EditText
+            android:id="@+id/profileBudgetEdit"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/budget_hint"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBudget" />
+
+        
 
         <TextView
             android:id="@+id/profileSleepTime"
@@ -230,12 +284,12 @@
             android:layout_marginTop="8dp"
             android:text="@string/sleep_time"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDateEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/profileBudgetEdit" />
 
         <com.santalu.maskedittext.MaskEditText
             android:id="@+id/profileSleepTomeEdit"
             style="@style/editTheme"
-            android:layout_width="match_parent"
+            android:layout_width="286dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -244,9 +298,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileSleepTime"
             app:met_mask="##:##" />
-
-
-
 
 
     </android.support.constraint.ConstraintLayout>

@@ -47,6 +47,10 @@ public class CreateProfileActivity extends AppCompatActivity
 
     private MaskEditText hourEditText;
 
+    private MaskEditText MoveInDateEditText;
+
+    private MaskEditText MoveOutDateEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +101,10 @@ public class CreateProfileActivity extends AppCompatActivity
         dateEditText = findViewById(R.id.profileBirthdayDateEdit);
 
         hourEditText = findViewById(R.id.profileSleepTomeEdit);
+
+        MoveInDateEditText = findViewById(R.id.profileMoveInDateEdit);
+
+        MoveOutDateEditText = findViewById(R.id.profileMoveOutDateEdit);
 
         filmTypesMultiAutoComplete = findViewById(R.id.moviesMultiAutoComplete);
         ArrayAdapter<String> moviesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmTypes);
