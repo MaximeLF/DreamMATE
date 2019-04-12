@@ -44,6 +44,7 @@ public class SendUserInfoTask extends AsyncTask<User, Void, Boolean>
             builder.appendPath("dev");
             builder.appendPath("users");
             builder.appendPath(user.id);
+            user.id = null;
 
             try {
                 Gson gson = new GsonBuilder().create();
@@ -57,6 +58,8 @@ public class SendUserInfoTask extends AsyncTask<User, Void, Boolean>
 
                 String body = gson.toJson(user);
 
+                Log.d("lua", "Sent user: " + body);
+
                 connection.setDoOutput(true);
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(body);
@@ -66,6 +69,17 @@ public class SendUserInfoTask extends AsyncTask<User, Void, Boolean>
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
                 {
+                    InputStreamReader reader = new InputStreamReader(connection.getInputStream());
+                    Scanner s = new Scanner(reader).useDelimiter("\\A");
+
+                    String answer = s.hasNext() ? s.next() : "";
+                    Log.d("lua", "Received user : " + answer);
+
+                    User receivedUser = gson.fromJson(answer, User.class);
+
+                    reader.close();
+                    connection.disconnect();
+
                     return true;
                 }
             }

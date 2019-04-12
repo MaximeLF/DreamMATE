@@ -77,4 +77,16 @@
 
     <string name="user_info_success">Your information has been successfully stored!</string>
     <string name="user_info_failure">Something went wrong, please try again</string>
+
+    <string name="select_birth_date">Please select a birth date first!</string>
+    <string name="select_gender">Please specify your gender!</string>
+    <string name="select_sleep_time">Please specify your usual sleep time!</string>
+    <string name="select_origin_countries">Please specify at least one origin country!</string>
+    <string name="select_languages">Please specify at lest one language you speak!</string>
+    <string name="select_destination_country">Please specify which country you want to live in!</string>
+    <string name="select_destination_city">Please specify which city you want to live at!</string>
+    <string name="select_arrival_date">Please choose the date you would like to arrive at the flat!</string>
+    <string name="select_budget">Please specify a valid budget!</string>
+    <string name="select_smoker">Please specify whether you\'re a smoker or not!</string>
+    <string name="select_occupation">Please choose the occupation that best fits you!</string>
 </resources>

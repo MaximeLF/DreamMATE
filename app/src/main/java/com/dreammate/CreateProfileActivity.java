@@ -34,6 +34,7 @@ import tasks.GetCitiesForCountryTask;
 import tasks.GetCountryListTask;
 import tasks.GetFilmTypesTask;
 import tasks.GetLanguageListTask;
+import tasks.SendUserInfoTask;
 
 public class CreateProfileActivity extends AppCompatActivity
 {
@@ -132,7 +133,7 @@ public class CreateProfileActivity extends AppCompatActivity
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 Calendar cldr = Calendar.getInstance();
                                 cldr.set(year, monthOfYear, dayOfMonth, 0, 0);
-                                birthDate = cldr.getTime();
+                                birthDate = new Date(cldr.getTimeInMillis());
                                 birthDateButton.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
@@ -163,7 +164,7 @@ public class CreateProfileActivity extends AppCompatActivity
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 Calendar cldr = Calendar.getInstance();
                                 cldr.set(year, monthOfYear, dayOfMonth, 0, 0);
-                                moveInDate = cldr.getTime();
+                                moveInDate = new Date(cldr.getTimeInMillis());
                                 moveInDateButton.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
@@ -203,7 +204,7 @@ public class CreateProfileActivity extends AppCompatActivity
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 Calendar cldr = Calendar.getInstance();
                                 cldr.set(year, monthOfYear, dayOfMonth, 0, 0);
-                                moveOutDate = cldr.getTime();
+                                moveOutDate = new Date(cldr.getTimeInMillis());
                                 moveOutDateButton.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
@@ -269,6 +270,12 @@ public class CreateProfileActivity extends AppCompatActivity
         user.lastName = lastName;
 
 
+
+
+        if (birthDate == null) {
+            Toast.makeText(this, getString(R.string.select_birth_date), Toast.LENGTH_SHORT).show();
+            return;
+        }
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(birthDate);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -279,8 +286,15 @@ public class CreateProfileActivity extends AppCompatActivity
         user.birthDate = birthDateString;
 
 
+
+
         RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
         int genderRadioButtonId = genderRadioGroup.getCheckedRadioButtonId();
+
+        if (genderRadioButtonId == -1) {
+            Toast.makeText(this, getString(R.string.select_gender), Toast.LENGTH_SHORT).show();
+            return;
+        }
         View genderRadioButton = genderRadioGroup.findViewById(genderRadioButtonId);
         int genderIdx = genderRadioGroup.indexOfChild(genderRadioButton);
         RadioButton genderRadio = (RadioButton) genderRadioGroup.getChildAt(genderIdx);
@@ -289,8 +303,98 @@ public class CreateProfileActivity extends AppCompatActivity
         user.gender = gender;
 
 
+
+
+        user.originCountries = new ArrayList<>();
+        String originCountries = originCountriesMultiAutoComplete.getText().toString().trim();
+        String[] singleOriginCountries = originCountries.split("\\s*,\\s*");
+
+        if (singleOriginCountries.length == 0) {
+            Toast.makeText(this, getString(R.string.select_origin_countries), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        for (int i = 0; i < singleOriginCountries.length; i++) {
+            user.originCountries.add(singleOriginCountries[i].trim());
+        }
+
+
+
+
+        user.languagesSpoken = new ArrayList<>();
+        String languages = spokenLanguagesMultiAutoComplete.getText().toString().trim();
+        String[] singleLanguages = languages.split("\\s*,\\s*");
+
+        if (singleLanguages.length == 0) {
+            Toast.makeText(this, getString(R.string.select_languages), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        for (int i = 0; i < singleLanguages.length; i++) {
+            user.languagesSpoken.add(singleLanguages[i].trim());
+        }
+
+
+
+
+
+        String wantedCountry = ((EditText)findViewById(R.id.wantedCountryAutoComplete)).getText().toString();
+        if (wantedCountry.trim().equals("")) {
+            Toast.makeText(this, getString(R.string.select_destination_country), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        user.stayingCountry = wantedCountry;
+
+
+
+
+
+        String wantedCity = ((EditText)findViewById(R.id.wantedCityAutoComplete)).getText().toString();
+        if (wantedCity.trim().equals("")) {
+            Toast.makeText(this, getString(R.string.select_destination_city), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        user.stayingCity = wantedCity;
+
+
+
+
+
+        if (moveInDate == null) {
+            Toast.makeText(this, getString(R.string.select_birth_date), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        calendar.setTime(moveInDate);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH) + 1;
+        year = calendar.get(Calendar.YEAR);
+        String moveInDateString = year + "-" + month + "-" + day;
+
+        user.arrivalDate = moveInDateString;
+
+
+
+
+
+
+        try {
+            int budget = Integer.parseInt(((EditText) findViewById(R.id.profileBudgetEdit)).getText().toString());
+            user.maxBudget = budget;
+        }
+        catch (Exception e) {
+            Toast.makeText(this, getString(R.string.select_budget), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+
+
         RadioGroup sleepTimeRadioGroup = findViewById(R.id.profileSleepTimeRadioGroup);
         int sleepTimeRadioButtonId = sleepTimeRadioGroup.getCheckedRadioButtonId();
+
+        if (sleepTimeRadioButtonId == -1) {
+            Toast.makeText(this, getString(R.string.select_sleep_time), Toast.LENGTH_SHORT).show();
+            return;
+        }
         View sleepTimeRadioButton = sleepTimeRadioGroup.findViewById(sleepTimeRadioButtonId);
         int sleepTimeIdx = sleepTimeRadioGroup.indexOfChild(sleepTimeRadioButton);
         RadioButton sleepTimeRadio = (RadioButton) sleepTimeRadioGroup.getChildAt(sleepTimeIdx);
@@ -299,36 +403,17 @@ public class CreateProfileActivity extends AppCompatActivity
         user.sleepTime = sleepTime;
 
 
-        user.originCountries = new ArrayList<>();
-        String originCountries = originCountriesMultiAutoComplete.getText().toString().trim();
-        String[] singleOriginCountries = originCountries.split("\\s*,\\s*");
-        for (int i = 0; i < singleOriginCountries.length; i++) {
-            user.originCountries.add(singleOriginCountries[i].trim());
-        }
 
 
-        user.languagesSpoken = new ArrayList<>();
-        String languages = spokenLanguagesMultiAutoComplete.getText().toString().trim();
-        String[] singleLanguages = languages.split("\\s*,\\s*");
-        for (int i = 0; i < singleLanguages.length; i++) {
-            user.languagesSpoken.add(singleLanguages[i].trim());
-        }
-
-
-        String wantedCountry = ((EditText)findViewById(R.id.wantedCountryAutoComplete)).getText().toString();
-        user.stayingCountry = wantedCountry;
-
-
-        String wantedCity = ((EditText)findViewById(R.id.wantedCityAutoComplete)).getText().toString();
-        user.stayingCity = wantedCity;
-
-
-        int budget = Integer.parseInt(((EditText)findViewById(R.id.profileBudgetEdit)).getText().toString());
-        user.maxBudget = budget;
 
 
         RadioGroup smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
         int smokerRadioButtonId = smokerRadioGroup.getCheckedRadioButtonId();
+
+        if (smokerRadioButtonId == -1) {
+            Toast.makeText(this, getString(R.string.select_smoker), Toast.LENGTH_SHORT).show();
+            return;
+        }
         View smokerRadioButton = smokerRadioGroup.findViewById(smokerRadioButtonId);
         int smokerIdx = smokerRadioGroup.indexOfChild(smokerRadioButton);
         RadioButton smokerRadio = (RadioButton) smokerRadioGroup.getChildAt(smokerIdx);
@@ -337,8 +422,16 @@ public class CreateProfileActivity extends AppCompatActivity
         user.smokes = smoker.equals(getString(R.string.yes));
 
 
+
+
+
         RadioGroup occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
         int occupationRadioButtonId = occupationRadioGroup.getCheckedRadioButtonId();
+
+        if (occupationRadioButtonId == -1) {
+            Toast.makeText(this, getString(R.string.select_occupation), Toast.LENGTH_SHORT).show();
+            return;
+        }
         View occupationRadioButton = occupationRadioGroup.findViewById(occupationRadioButtonId);
         int occupationIdx = occupationRadioGroup.indexOfChild(occupationRadioButton);
         RadioButton occupationRadio = (RadioButton) occupationRadioGroup.getChildAt(occupationIdx);
@@ -348,10 +441,11 @@ public class CreateProfileActivity extends AppCompatActivity
 
 
         String description = ((EditText) findViewById(R.id.profileDescriptionEdit)).getText().toString();
-        user.description = description;
+        user.description = description.trim();
 
 
         // call task to send user to server
+        new SendUserInfoTask(this).execute(user);
     }
 
 
