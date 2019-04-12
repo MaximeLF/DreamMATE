@@ -31,7 +31,8 @@
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_matches">Matches</string>
+    <string name="title_profile">Profile</string>
 
     <string name="gender">Which is your gender?</string>
     <string name="female">Female</string>
@@ -39,6 +40,12 @@
     <string name="other">Other</string>
     <string name="origin_country">Origin country</string>
     <string name="country_hint">Select your country</string>
+
+    <string name="matches">MATCHES</string>
+    <string name="details">Details</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_custom_list_view_acivity">CustomListViewAcivity</string>
+
     <string name="movies">Which kinds of movies do you like?</string>
     <string name="movie_hint">Select types of movies</string>
     <string name="date_of_birth">Date of birth</string>
