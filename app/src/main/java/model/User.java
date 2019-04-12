@@ -50,6 +50,9 @@ public class User {
     @SerializedName("Created_date")
     public String createdDate;
 
+    @SerializedName("description")
+    public String description;
+
     @SerializedName("__v")
     private int v;
 
@@ -80,6 +83,17 @@ public class User {
         this.email = email;
         encrypted = hash(password);
     }
+
+    public User(String fName, String lName, String desc){
+
+        firstName = fName;
+        firstName = lName;
+        description = desc;
+    }
+
+    public String getFirstName(){ return firstName;}
+    public String getLastName(){ return lastName;}
+    public String getDescription(){ return description;}
 
     public void login(AppCompatActivity activity)
     {
