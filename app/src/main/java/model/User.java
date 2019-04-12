@@ -77,8 +77,6 @@ public class User {
     @SerializedName("Created_date")
     public String createdDate;
 
-    @SerializedName("description")
-    public String description;
 
     @SerializedName("__v")
     private int v;

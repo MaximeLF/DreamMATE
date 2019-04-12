@@ -9,13 +9,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.CustomAdapter;
 import model.User;
@@ -24,6 +23,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private LinearLayout profile;
+    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -32,13 +32,14 @@ public class DashboardActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.navigation_profile:
-                    mTextMessage.setText(R.string.title_profile);
+                    intent = new Intent(getApplicationContext(), MyProfileActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.navigation_matches:
-                    mTextMessage.setText(R.string.title_matches);
                     return true;
             }
             return false;
@@ -71,7 +72,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("Nuno", "funciona");
-                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 intent.putExtra("First Name", list.get(position).getFirstName());
                 intent.putExtra("Last Name", list.get(position).getLastName());
                 startActivity(intent);
@@ -97,6 +98,11 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
+    }
+
+    public void onMatchesComputed(List<User> users){
+
+        
     }
 
 }

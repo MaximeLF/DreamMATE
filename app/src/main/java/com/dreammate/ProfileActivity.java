@@ -3,14 +3,14 @@ package com.dreammate;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Profile extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setTitle("ProfileActivity");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
