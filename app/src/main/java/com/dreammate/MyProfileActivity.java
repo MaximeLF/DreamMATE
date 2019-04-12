@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +18,6 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -32,13 +30,12 @@ import java.util.List;
 import model.User;
 import tasks.GetCitiesForCountryTask;
 import tasks.GetCountryListTask;
-import tasks.GetFilmTypesTask;
 import tasks.GetLanguageListTask;
 import tasks.SendUserInfoTask;
 
-public class CreateProfileActivity extends AppCompatActivity
+public class MyProfileActivity extends AppCompatActivity
 {
-    CreateProfileActivity thisActivity = this;
+    MyProfileActivity thisActivity = this;
     List<String> countries = new ArrayList<String>();
     List<String> languages = new ArrayList<String>();
     List<String> cities = new ArrayList<String>();
@@ -63,7 +60,7 @@ public class CreateProfileActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_profile);
+        setContentView(R.layout.activity_my_profile);
 
         Button finish = (Button) findViewById(R.id.finishButton);
         finish.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +124,7 @@ public class CreateProfileActivity extends AppCompatActivity
                 year = calendar.get(Calendar.YEAR);
 
                 // date picker dialog
-                DatePickerDialog picker = new DatePickerDialog(CreateProfileActivity.this,
+                DatePickerDialog picker = new DatePickerDialog(MyProfileActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -158,7 +155,7 @@ public class CreateProfileActivity extends AppCompatActivity
                 year = calendar.get(Calendar.YEAR);
 
                 // date picker dialog
-                DatePickerDialog picker = new DatePickerDialog(CreateProfileActivity.this,
+                DatePickerDialog picker = new DatePickerDialog(MyProfileActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -198,7 +195,7 @@ public class CreateProfileActivity extends AppCompatActivity
                 year = calendar.get(Calendar.YEAR);
 
                 // date picker dialog
-                DatePickerDialog picker = new DatePickerDialog(CreateProfileActivity.this,
+                DatePickerDialog picker = new DatePickerDialog(MyProfileActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

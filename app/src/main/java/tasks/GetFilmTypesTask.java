@@ -2,10 +2,9 @@ package tasks;
 
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.dreammate.CreateProfileActivity;
+import com.dreammate.MyProfileActivity;
 import com.dreammate.R;
 
 import java.io.InputStreamReader;
@@ -18,9 +17,9 @@ import java.util.Scanner;
 
 public class GetFilmTypesTask extends AsyncTask<Void, Void, List<String>> {
 
-    private WeakReference<CreateProfileActivity> actWeakRef;
+    private WeakReference<MyProfileActivity> actWeakRef;
 
-    public GetFilmTypesTask(CreateProfileActivity act) {
+    public GetFilmTypesTask(MyProfileActivity act) {
         actWeakRef = new WeakReference<>(act);
     }
 

@@ -1,8 +1,6 @@
 package com.dreammate;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -77,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         {
             user.login(this);
 
-            Intent intent = new Intent(getApplicationContext(), CreateProfileActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
             startActivity(intent);
         }
         else {

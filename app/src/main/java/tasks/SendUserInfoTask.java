@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.dreammate.CreateProfileActivity;
+import com.dreammate.MyProfileActivity;
 import com.dreammate.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,9 +20,9 @@ import model.User;
 
 public class SendUserInfoTask extends AsyncTask<User, Void, Boolean>
 {
-    private WeakReference<CreateProfileActivity> actWeakRef;
+    private WeakReference<MyProfileActivity> actWeakRef;
 
-    public SendUserInfoTask(CreateProfileActivity activity) {
+    public SendUserInfoTask(MyProfileActivity activity) {
         actWeakRef = new WeakReference<>(activity);
     }
 

@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.dreammate.CreateProfileActivity;
+import com.dreammate.MyProfileActivity;
 import com.dreammate.R;
 
 import java.io.InputStreamReader;
@@ -17,9 +17,9 @@ import java.util.Scanner;
 
 public class GetCitiesForCountryTask extends AsyncTask<String, Void, List<String>> {
 
-    private WeakReference<CreateProfileActivity> actWeakRef;
+    private WeakReference<MyProfileActivity> actWeakRef;
 
-    public GetCitiesForCountryTask(CreateProfileActivity act) {
+    public GetCitiesForCountryTask(MyProfileActivity act) {
         actWeakRef = new WeakReference<>(act);
     }
 
