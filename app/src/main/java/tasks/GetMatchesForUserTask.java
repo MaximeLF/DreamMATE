@@ -83,6 +83,7 @@ public class GetMatchesForUserTask extends AsyncTask<String, Void, List<User>> {
                 Log.e("lua", e.toString());
             }
         }
+        return null;
     }
 
     @Override
