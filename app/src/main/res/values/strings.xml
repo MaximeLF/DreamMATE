@@ -89,4 +89,5 @@
     <string name="select_budget">Please specify a valid budget!</string>
     <string name="select_smoker">Please specify whether you\'re a smoker or not!</string>
     <string name="select_occupation">Please choose the occupation that best fits you!</string>
+    <string name="select_country_first">Select a country first!</string>
 </resources>

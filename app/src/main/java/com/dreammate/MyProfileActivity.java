@@ -43,28 +43,51 @@ public class MyProfileActivity extends AppCompatActivity
     private Date moveInDate;
     private Date moveOutDate;
 
-    private MultiAutoCompleteTextView originCountriesMultiAutoComplete = findViewById(R.id.originCountriesMultiAutoComplete);;
-    private AutoCompleteTextView wantedCountryAutoComplete = findViewById(R.id.wantedCountryAutoComplete);;
-    private AutoCompleteTextView wantedCityAutoComplete = findViewById(R.id.wantedCityAutoComplete);;
-    private MultiAutoCompleteTextView spokenLanguagesMultiAutoComplete = findViewById(R.id.spokenLanguagesMultiAutoComplete);;
+    private MultiAutoCompleteTextView originCountriesMultiAutoComplete;
+    private AutoCompleteTextView wantedCountryAutoComplete;
+    private AutoCompleteTextView wantedCityAutoComplete;
+    private MultiAutoCompleteTextView spokenLanguagesMultiAutoComplete;
 
-    private Button birthDateButton = findViewById(R.id.profileBirthdayDateButton);;
-    private Button moveInDateButton = findViewById(R.id.profileMoveInDateButton);;
-    private Button moveOutDateButton = findViewById(R.id.profileMoveOutDateButton);;
-    private Button finishButton = findViewById(R.id.finishButton);
+    private Button birthDateButton;
+    private Button moveInDateButton;
+    private Button moveOutDateButton;
+    private Button finishButton;
 
-    private RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
-    private RadioGroup sleepTimeRadioGroup = findViewById(R.id.profileSleepTimeRadioGroup);
-    private RadioGroup smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
-    private RadioGroup occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
+    private RadioGroup genderRadioGroup;
+    private RadioGroup sleepTimeRadioGroup;
+    private RadioGroup smokerRadioGroup;
+    private RadioGroup occupationRadioGroup;
 
-    private EditText descriptionEdit = findViewById(R.id.profileDescriptionEdit);
+    private EditText descriptionEdit;
+
+
+    private void findViews()
+    {
+        originCountriesMultiAutoComplete = findViewById(R.id.originCountriesMultiAutoComplete);
+        wantedCountryAutoComplete = findViewById(R.id.wantedCountryAutoComplete);
+        wantedCityAutoComplete = findViewById(R.id.wantedCityAutoComplete);
+        spokenLanguagesMultiAutoComplete = findViewById(R.id.spokenLanguagesMultiAutoComplete);
+
+        birthDateButton = findViewById(R.id.profileBirthdayDateButton);
+        moveInDateButton = findViewById(R.id.profileMoveInDateButton);
+        moveOutDateButton = findViewById(R.id.profileMoveOutDateButton);
+        finishButton = findViewById(R.id.finishButton);
+
+        genderRadioGroup = findViewById(R.id.genderRadioGroup);
+        sleepTimeRadioGroup = findViewById(R.id.profileSleepTimeRadioGroup);
+        smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
+        occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
+
+        descriptionEdit = findViewById(R.id.profileDescriptionEdit);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
+        findViews();
 
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,13 +96,9 @@ public class MyProfileActivity extends AppCompatActivity
             }
         });
 
-        countries.add("Loading country list");
         new GetCountryListTask(this).execute();
 
-        languages.add("Loading language list");
         new GetLanguageListTask(this).execute();
-
-        cities.add("Select a country first!");
 
 
         originCountriesMultiAutoComplete.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries));
@@ -209,12 +228,15 @@ public class MyProfileActivity extends AppCompatActivity
         wantedCountryAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 String selected_country = parent.getItemAtPosition(position).toString();
 
                 cities = new ArrayList<>();
                 cities.add("Loading cities list");
 
                 Log.d("lua", "Country selection detected: " + selected_country);
+
+                wantedCityAutoComplete.setHint(R.string.wanted_city_hint);
 
                 new GetCitiesForCountryTask(thisActivity).execute(selected_country);
             }
@@ -464,7 +486,7 @@ public class MyProfileActivity extends AppCompatActivity
 
     public void onUserInfoReceived(User user) {
         if (user == null) {
-            
+
         }
         else {
 
