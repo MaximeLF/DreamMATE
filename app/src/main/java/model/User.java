@@ -29,17 +29,44 @@ public class User {
     @SerializedName("email_address")
     public String email;
 
+    @SerializedName("birth_date")
+    public String birthDate;
+
     @SerializedName("encrypted_password")
     public String encrypted;
 
     @SerializedName("gender")
     public String gender;
 
-    @SerializedName("origin_country")
-    public String originCountry;
+    @SerializedName("origin_countries")
+    public List<String> originCountries;
 
     @SerializedName("languages_spoken")
     public List<String> languagesSpoken;
+
+    @SerializedName("staying_country")
+    public String stayingCountry;
+
+    @SerializedName("staying_city")
+    public String stayingCity;
+
+    @SerializedName("max_budget")
+    public int maxBudget;
+
+    @SerializedName("smoker")
+    public boolean smokes;
+
+    @SerializedName("occupation")
+    public String occupation;
+
+    @SerializedName("description")
+    public String description;
+
+    @SerializedName("arrival_date")
+    public String arrivalDate;
+
+    @SerializedName("departure_date")
+    public String departureDate;
 
     @SerializedName("film_type")
     public List<String> filmTypes;
@@ -67,6 +94,10 @@ public class User {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public User() {
+
     }
 
     public User(String email, String password)

@@ -23,7 +23,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".DashboardActivity" />
         <activity
-            android:name=".CreateProfileActivity"
+            android:name=".MyProfileActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".RegisterActivity"

@@ -34,20 +34,66 @@
     <string name="title_matches">Matches</string>
     <string name="title_profile">Profile</string>
 
-    <string name="gender">Gender</string>
+    <string name="gender">Which is your gender?</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="other">Other</string>
     <string name="origin_country">Origin country</string>
     <string name="country_hint">Select your country</string>
-    <string name="languages">Languages spoken</string>
-    <string name="language_hint">Select the languages that you speak</string>
-    <string name="movies">Movies types</string>
-    <string name="movie_hint">Select the type of movies you like</string>
-
 
     <string name="matches">MATCHES</string>
     <string name="details">Details</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_custom_list_view_acivity">CustomListViewAcivity</string>
+
+    <string name="movies">Which kinds of movies do you like?</string>
+    <string name="movie_hint">Select types of movies</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="date_hint">dd/mm/yyyy</string>
+    <string name="sleep_time">At what time do you usually go to sleep?</string>
+    <string name="origin_countries">Which countries do you come from?</string>
+    <string name="origin_countries_hint">Select countries</string>
+    <string name="languages">Which languages can you speak?</string>
+    <string name="language_hint">Select languages</string>
+    <string name="wanted_country">In which country are you looking for a flat?</string>
+    <string name="wanted_country_hint">Select country</string>
+    <string name="wanted_city">And in which city?</string>
+    <string name="wanted_city_hint">Select city</string>
+    <string name="move_in_date">Move in date</string>
+    <string name="move_out_date">Move out date</string>
+    <string name="budget">What\'s your maximum monthly budget? </string>
+    <string name="select_date">Select date</string>
+    <string name="budget_hint">Insert monthly budget</string>
+    <string name="select_move_in">Please select the move in date first!</string>
+    <string name="smoke">Do you smoke?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="finish">Finish</string>
+    <string name="occupation">What do you do for a living?</string>
+    <string name="local_student">I\'m a local student</string>
+    <string name="international_student">I\'m an international student</string>
+    <string name="work">I work</string>
+    <string name="finding">I\'m searching for meaning in life</string>
+    <string name="radio_9_10">9:00-10:00</string>
+    <string name="radio_10_12">10:00-12:00</string>
+    <string name="radio_12_plus">12:00+</string>
+    <string name="euro">€</string>
+    <string name="description">About you!</string>
+    <string name="description_hint">Tell the world about your taste in music, sports, games, activities, or anything else you like about yourself!</string>
+
+
+    <string name="user_info_success">Your information has been successfully stored!</string>
+    <string name="user_info_failure">Something went wrong, please try again</string>
+
+    <string name="select_birth_date">Please select a birth date first!</string>
+    <string name="select_gender">Please specify your gender!</string>
+    <string name="select_sleep_time">Please specify your usual sleep time!</string>
+    <string name="select_origin_countries">Please specify at least one origin country!</string>
+    <string name="select_languages">Please specify at lest one language you speak!</string>
+    <string name="select_destination_country">Please specify which country you want to live in!</string>
+    <string name="select_destination_city">Please specify which city you want to live at!</string>
+    <string name="select_arrival_date">Please choose the date you would like to arrive at the flat!</string>
+    <string name="select_budget">Please specify a valid budget!</string>
+    <string name="select_smoker">Please specify whether you\'re a smoker or not!</string>
+    <string name="select_occupation">Please choose the occupation that best fits you!</string>
 </resources>

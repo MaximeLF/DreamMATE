@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
+public class GetCitiesForCountryTask extends AsyncTask<String, Void, List<String>> {
 
     private WeakReference<MyProfileActivity> actWeakRef;
 
-    public GetLanguageListTask(MyProfileActivity act) {
+    public GetCitiesForCountryTask(MyProfileActivity act) {
         actWeakRef = new WeakReference<>(act);
     }
 
@@ -29,16 +29,18 @@ public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
     }
 
     @Override
-    protected List<String> doInBackground(Void... voids)
+    protected List<String> doInBackground(String... countries)
     {
         if (actWeakRef != null)
         {
+            String country = countries[0];
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("https");
             String server = actWeakRef.get().getApplicationContext().getResources().getString(R.string.server_url);
             builder.authority(server);
             builder.appendPath("dev");
-            builder.appendPath("languages_list");
+            builder.appendPath("cities_of_country");
+            builder.appendPath(country);
 
             try {
                 URL url = new URL(builder.build().toString());
@@ -57,18 +59,18 @@ public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
                     reader.close();
                     connection.disconnect();
 
-                    Log.d("lua", "Received languages: " + answer);
+                    Log.d("lua", "Received cities: " + answer);
 
                     answer = answer.substring(2, answer.length() - 2); // remove '["' at the beginning and '"]' at the end
-                    List<String> languages = new ArrayList<>();
+                    List<String> cities = new ArrayList<>();
                     String[] words = answer.split("\",\"");
 
                     for (int i = 0; i < words.length; i++) {
                         String clean = words[i].trim();
-                        languages.add(clean);
+                        cities.add(clean);
                     }
 
-                    return languages;
+                    return cities;
                 }
                 else {
                     Log.d("lua", "Response code was NOT OK");
@@ -83,10 +85,10 @@ public class GetLanguageListTask extends AsyncTask<Void, Void, List<String>> {
     }
 
     @Override
-    protected void onPostExecute(List<String> languages) {
-        super.onPostExecute(languages);
+    protected void onPostExecute(List<String> cities) {
+        super.onPostExecute(cities);
         if (actWeakRef != null) {
-            actWeakRef.get().onLanguagesResultComputed(languages); // PUT HERE THE CODE THAT PUTS THE GIVEN LIST IN THE ACTIVITY
+            actWeakRef.get().onCitiesResultComputed(cities);
         }
     }
 }

@@ -93,7 +93,7 @@ public class DashboardActivity extends AppCompatActivity {
         continueRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CreateProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
                 startActivity(intent);
             }
         });*/

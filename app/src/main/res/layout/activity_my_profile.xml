@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".MyProfileActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/profileLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/dreammate_logo" />
+
+
+        <TextView
+            android:id="@+id/profileTellUsMore"
+            style="@style/headerTheme"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/tell_us_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileLogo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileBirthdayDate"
+            style="@style/textTheme"
+            android:layout_width="142dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="56dp"
+            android:text="@string/date_of_birth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileTellUsMore" />
+
+        <Button
+            android:id="@+id/profileBirthdayDateButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/select_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDate"/>
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileGender"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/gender"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBirthdayDateButton" />
+
+        <RadioGroup
+            android:id="@+id/genderRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/profileGender">
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female" />
+
+            <RadioButton
+                android:id="@+id/radio_male"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/radio_other"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/other" />
+        </RadioGroup>
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileOriginCountries"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/origin_countries"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genderRadioGroup" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/originCountriesMultiAutoComplete"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/origin_countries_hint"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileOriginCountries" />
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileLanguages"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/languages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/originCountriesMultiAutoComplete" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/spokenLanguagesMultiAutoComplete"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/language_hint"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileLanguages" />
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/wantedCountryText"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="76dp"
+            android:text="@string/wanted_country"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spokenLanguagesMultiAutoComplete" />
+
+        <AutoCompleteTextView
+            android:id="@+id/wantedCountryAutoComplete"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:completionThreshold="1"
+            android:hint="@string/wanted_country_hint"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wantedCountryText" />
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/wantedCityText"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/wanted_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wantedCountryAutoComplete" />
+
+        <AutoCompleteTextView
+            android:id="@+id/wantedCityAutoComplete"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/wanted_city_hint"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wantedCityText" />
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileMoveInDate"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/move_in_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/profileMoveOutDate"
+            app:layout_constraintTop_toBottomOf="@+id/wantedCityAutoComplete" />
+
+        <Button
+            android:id="@+id/profileMoveInDateButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/select_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/profileMoveOutDateButton"
+            app:layout_constraintTop_toBottomOf="@+id/profileMoveInDate" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileMoveOutDate"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/move_out_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileMoveInDate"
+            app:layout_constraintTop_toBottomOf="@+id/wantedCityAutoComplete" />
+
+        <Button
+            android:id="@+id/profileMoveOutDateButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/select_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileMoveInDate"
+            app:layout_constraintTop_toBottomOf="@+id/profileMoveOutDate" />
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileBudget"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/budget"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileMoveOutDateButton" />
+
+        <EditText
+            android:id="@+id/profileBudgetEdit"
+            style="@style/editTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/budget_hint"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBudget" />
+
+        <TextView
+            android:id="@+id/profileBudgetEuro"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/euro"
+            app:layout_constraintStart_toEndOf="@id/profileBudgetEdit"
+            app:layout_constraintTop_toBottomOf="@id/profileBudget"/>
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileSleepTime"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/sleep_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBudgetEdit" />
+
+        <RadioGroup
+            android:id="@+id/profileSleepTimeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileSleepTime">
+
+            <RadioButton
+                android:id="@+id/radio_9_10"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_9_10" />
+
+            <RadioButton
+                android:id="@+id/radio_10_12"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_10_12" />
+
+            <RadioButton
+                android:id="@+id/radio_12_plus"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_12_plus" />
+
+        </RadioGroup>
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileSmoke"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/smoke"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileSleepTimeRadioGroup" />
+
+        <RadioGroup
+            android:id="@+id/smokeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileSmoke">
+
+            <RadioButton
+                android:id="@+id/radio_yes"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/radio_no"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no" />
+
+        </RadioGroup>
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileOccupation"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/occupation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/smokeRadioGroup" />
+
+        <RadioGroup
+            android:id="@+id/occupationRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileOccupation"
+            tools:layout_editor_absoluteY="0dp">
+
+            <RadioButton
+                android:id="@+id/radio_lStudent"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/local_student" />
+
+            <RadioButton
+                android:id="@+id/radio_iStudent"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/international_student" />
+
+            <RadioButton
+                android:id="@+id/radio_work"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/work" />
+
+            <RadioButton
+                android:id="@+id/radio_life"
+                style="@style/editTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finding" />
+        </RadioGroup>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileDescription"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/occupationRadioGroup" />
+
+        <EditText
+            android:id="@+id/profileDescriptionEdit"
+            style="@style/editTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/description_hint"
+            android:inputType="textMultiLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileDescription" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <Button
+            android:id="@+id/finishButton"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/finish"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileDescriptionEdit" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
