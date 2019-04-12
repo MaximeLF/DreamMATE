@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -40,34 +39,37 @@ public class MyProfileActivity extends AppCompatActivity
     List<String> languages = new ArrayList<String>();
     List<String> cities = new ArrayList<String>();
 
-
-    private MultiAutoCompleteTextView originCountriesMultiAutoComplete;
-    private AutoCompleteTextView wantedCountryAutoComplete;
-    private AutoCompleteTextView wantedCityAutoComplete;
-    private MultiAutoCompleteTextView spokenLanguagesMultiAutoComplete;
-
-    private Button birthDateButton;
-    private Button moveInDateButton;
-    private Button moveOutDateButton;
-
     private Date birthDate;
     private Date moveInDate;
     private Date moveOutDate;
 
-    private Spinner sleepTimeSpinner;
+    private MultiAutoCompleteTextView originCountriesMultiAutoComplete = findViewById(R.id.originCountriesMultiAutoComplete);;
+    private AutoCompleteTextView wantedCountryAutoComplete = findViewById(R.id.wantedCountryAutoComplete);;
+    private AutoCompleteTextView wantedCityAutoComplete = findViewById(R.id.wantedCityAutoComplete);;
+    private MultiAutoCompleteTextView spokenLanguagesMultiAutoComplete = findViewById(R.id.spokenLanguagesMultiAutoComplete);;
 
+    private Button birthDateButton = findViewById(R.id.profileBirthdayDateButton);;
+    private Button moveInDateButton = findViewById(R.id.profileMoveInDateButton);;
+    private Button moveOutDateButton = findViewById(R.id.profileMoveOutDateButton);;
+    private Button finishButton = findViewById(R.id.finishButton);
+
+    private RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
+    private RadioGroup sleepTimeRadioGroup = findViewById(R.id.profileSleepTimeRadioGroup);
+    private RadioGroup smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
+    private RadioGroup occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
+
+    private EditText descriptionEdit = findViewById(R.id.profileDescriptionEdit);
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
-        Button finish = (Button) findViewById(R.id.finishButton);
-        finish.setOnClickListener(new View.OnClickListener() {
+        finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                startCreateProfile();
+            public void onClick(View v) {
+                tryToSendUserInfo();
             }
         });
 
@@ -80,32 +82,15 @@ public class MyProfileActivity extends AppCompatActivity
         cities.add("Select a country first!");
 
 
-
-        originCountriesMultiAutoComplete = findViewById(R.id.originCountriesMultiAutoComplete);
-        ArrayAdapter<String> originCountriesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
-        originCountriesMultiAutoComplete.setAdapter(originCountriesAdapter);
+        originCountriesMultiAutoComplete.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries));
         originCountriesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-        wantedCountryAutoComplete = findViewById(R.id.wantedCountryAutoComplete);
-        ArrayAdapter<String> wantedCountryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
-        wantedCountryAutoComplete.setAdapter(wantedCountryAdapter);
+        wantedCountryAutoComplete.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries));
 
+        wantedCityAutoComplete.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities));
 
-        wantedCityAutoComplete = findViewById(R.id.wantedCityAutoComplete);
-        ArrayAdapter<String> wantedCityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities);
-        wantedCityAutoComplete.setAdapter(wantedCityAdapter);
-
-
-        spokenLanguagesMultiAutoComplete = findViewById(R.id.spokenLanguagesMultiAutoComplete);
-        ArrayAdapter<String> languagesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languages);
-        spokenLanguagesMultiAutoComplete.setAdapter(languagesAdapter);
+        spokenLanguagesMultiAutoComplete.setAdapter( new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languages));
         spokenLanguagesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
-
-
-        birthDateButton = findViewById(R.id.profileBirthdayDateButton);
-        moveInDateButton = findViewById(R.id.profileMoveInDateButton);
-        moveOutDateButton = findViewById(R.id.profileMoveOutDateButton);
 
 
         birthDateButton.setOnClickListener(new View.OnClickListener() {
@@ -236,6 +221,7 @@ public class MyProfileActivity extends AppCompatActivity
         });
     }
 
+
     public void onCitiesResultComputed(List<String> result)
     {
         cities = new ArrayList<>(result);
@@ -243,6 +229,7 @@ public class MyProfileActivity extends AppCompatActivity
         ArrayAdapter<String> wantedCityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities);
         wantedCityAutoComplete.setAdapter(wantedCityAdapter);
     }
+
 
     public void onLanguagesResultComputed(List<String> result)
     {
@@ -253,7 +240,8 @@ public class MyProfileActivity extends AppCompatActivity
         spokenLanguagesMultiAutoComplete.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 
-    public void startCreateProfile()
+
+    public void tryToSendUserInfo()
     {
         User user = new User();
 
@@ -285,9 +273,8 @@ public class MyProfileActivity extends AppCompatActivity
 
 
 
-        RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
-        int genderRadioButtonId = genderRadioGroup.getCheckedRadioButtonId();
 
+        int genderRadioButtonId = genderRadioGroup.getCheckedRadioButtonId();
         if (genderRadioButtonId == -1) {
             Toast.makeText(this, getString(R.string.select_gender), Toast.LENGTH_SHORT).show();
             return;
@@ -363,11 +350,21 @@ public class MyProfileActivity extends AppCompatActivity
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
-        String moveInDateString = year + "-" + month + "-" + day;
 
-        user.arrivalDate = moveInDateString;
+        user.arrivalDate = year + "-" + month + "-" + day;
 
 
+
+
+
+        if (moveOutDate != null) {
+            calendar.setTime(moveInDate);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+            month = calendar.get(Calendar.MONTH) + 1;
+            year = calendar.get(Calendar.YEAR);
+
+            user.departureDate = year + "-" + month + "-" + day;
+        }
 
 
 
@@ -385,7 +382,7 @@ public class MyProfileActivity extends AppCompatActivity
 
 
 
-        RadioGroup sleepTimeRadioGroup = findViewById(R.id.profileSleepTimeRadioGroup);
+
         int sleepTimeRadioButtonId = sleepTimeRadioGroup.getCheckedRadioButtonId();
 
         if (sleepTimeRadioButtonId == -1) {
@@ -404,7 +401,7 @@ public class MyProfileActivity extends AppCompatActivity
 
 
 
-        RadioGroup smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
+
         int smokerRadioButtonId = smokerRadioGroup.getCheckedRadioButtonId();
 
         if (smokerRadioButtonId == -1) {
@@ -422,7 +419,7 @@ public class MyProfileActivity extends AppCompatActivity
 
 
 
-        RadioGroup occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
+
         int occupationRadioButtonId = occupationRadioGroup.getCheckedRadioButtonId();
 
         if (occupationRadioButtonId == -1) {
@@ -437,8 +434,10 @@ public class MyProfileActivity extends AppCompatActivity
         user.occupation = occupation;
 
 
-        String description = ((EditText) findViewById(R.id.profileDescriptionEdit)).getText().toString();
-        user.description = description.trim();
+
+
+        user.description = descriptionEdit.getText().toString().trim();
+
 
 
         // call task to send user to server
@@ -448,7 +447,8 @@ public class MyProfileActivity extends AppCompatActivity
 
 
 
-    public void onUserInfoSent(Boolean worked) {
+    public void onUserInfoSent(Boolean worked)
+    {
         if (worked) {
             Toast.makeText(getApplicationContext(), getString(R.string.user_info_success), Toast.LENGTH_SHORT).show();
 
@@ -458,6 +458,16 @@ public class MyProfileActivity extends AppCompatActivity
         }
         else {
             Toast.makeText(getApplicationContext(), getString(R.string.user_info_failure), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void onUserInfoReceived(User user) {
+        if (user == null) {
+            
+        }
+        else {
+
         }
     }
 }
