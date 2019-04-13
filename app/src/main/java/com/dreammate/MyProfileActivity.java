@@ -2,6 +2,7 @@ package com.dreammate;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -228,6 +229,13 @@ public class MyProfileActivity extends AppCompatActivity
                         }, year, month, day);
                 picker.getDatePicker().setMinDate(moveInDate.getTime());
                 picker.show();
+                picker.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        moveOutDate = null;
+                        moveOutDateButton.setText(R.string.select_date);
+                    }
+                });
             }
         });
 
@@ -394,7 +402,7 @@ public class MyProfileActivity extends AppCompatActivity
 
 
         if (moveInDate == null) {
-            Toast.makeText(this, getString(R.string.select_birth_date), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.select_move_in), Toast.LENGTH_SHORT).show();
             return;
         }
         calendar.setTime(moveInDate);
@@ -415,6 +423,9 @@ public class MyProfileActivity extends AppCompatActivity
             year = calendar.get(Calendar.YEAR);
 
             user.departureDate = year + "-" + month + "-" + day;
+        }
+        else {
+            user.departureDate = "";
         }
 
 

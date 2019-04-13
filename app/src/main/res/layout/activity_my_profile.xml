@@ -31,12 +31,11 @@
             style="@style/headerTheme"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="40dp"
             android:layout_marginEnd="8dp"
             android:text="@string/tell_us_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileLogo" />
+            app:layout_constraintTop_toBottomOf="@id/profileLogo"/>
 
 
 
@@ -52,7 +51,7 @@
             style="@style/textTheme"
             android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="50dp"
             android:text="@string/telephone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileTellUsMore" />
