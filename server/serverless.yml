@@ -43,6 +43,15 @@ functions:
             path: film_types
             method: get
             cors: true
+        - http:
+            path: cities_of_country/{country}
+            method: get
+            cors: true
+        - http:
+            path: matches/{id}
+            method: put
+            cors: true
+
 
 
 

@@ -12,6 +12,7 @@
     "debug": "~2.6.9",
     "dotenv": "^7.0.0",
     "express": "~4.16.0",
+    "full-countries-cities": "0.0.9",
     "http-errors": "~1.6.2",
     "langs": "^2.0.0",
     "mongoose": "^5.4.19",
