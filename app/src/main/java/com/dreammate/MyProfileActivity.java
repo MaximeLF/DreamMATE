@@ -60,6 +60,7 @@ public class MyProfileActivity extends AppCompatActivity
     private RadioGroup smokerRadioGroup;
     private RadioGroup occupationRadioGroup;
 
+    private EditText telephoneEdit;
     private EditText budgetEdit;
     private EditText descriptionEdit;
 
@@ -82,6 +83,7 @@ public class MyProfileActivity extends AppCompatActivity
         smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
         occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
 
+        telephoneEdit = findViewById(R.id.profileTelephoneEdit);
         budgetEdit = findViewById(R.id.profileBudgetEdit);
         descriptionEdit = findViewById(R.id.profileDescriptionEdit);
     }
@@ -294,6 +296,18 @@ public class MyProfileActivity extends AppCompatActivity
 
 
 
+        String telephone = telephoneEdit.getText().toString().trim();
+
+        if (telephone.length() == 0) {
+            Toast.makeText(this,getString(R.string.select_telephone), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        user.telephone = telephone;
+
+
+
+
         if (birthDate == null) {
             Toast.makeText(this, getString(R.string.select_birth_date), Toast.LENGTH_SHORT).show();
             return;
@@ -490,7 +504,7 @@ public class MyProfileActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), getString(R.string.user_info_success), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            finish();
             startActivity(intent);
         }
         else {
@@ -508,6 +522,13 @@ public class MyProfileActivity extends AppCompatActivity
         if (user == null) {
             return;
         }
+
+
+        if (user.telephone != null) {
+            telephoneEdit.setText(user.telephone);
+            telephoneEdit.setSelection(user.telephone.length());
+        }
+
 
         if (user.birthDate != null) {
             int year, month, day;

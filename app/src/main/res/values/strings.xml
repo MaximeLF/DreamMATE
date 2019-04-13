@@ -97,4 +97,9 @@
     <string name="select_smoker">Please specify whether you\'re a smoker or not!</string>
     <string name="select_occupation">Please choose the occupation that best fits you!</string>
     <string name="select_country_first">Select a country first!</string>
+
+
+    <string name="telephone">What is your telephone number?</string>
+    <string name="select_telephone">Please enter your telephone number!</string>
+    <string name="telephone_hint">Enter telephone number</string>
 </resources>
