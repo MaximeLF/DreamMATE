@@ -21,7 +21,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/dreammate_logo" />
@@ -36,10 +35,38 @@
             android:text="@string/tell_us_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileLogo" />
+            app:layout_constraintTop_toBottomOf="@id/profileLogo"/>
 
 
 
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/profileTelephone"
+            style="@style/textTheme"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/telephone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileTellUsMore" />
+
+        <EditText
+            android:id="@+id/profileTelephoneEdit"
+            style="@style/editTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/telephone_hint"
+            android:inputType="phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileTelephone" />
 
 
 
@@ -53,12 +80,12 @@
         <TextView
             android:id="@+id/profileBirthdayDate"
             style="@style/textTheme"
-            android:layout_width="142dp"
+            android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="8dp"
             android:text="@string/date_of_birth"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileTellUsMore" />
+            app:layout_constraintTop_toBottomOf="@+id/profileTelephoneEdit" />
 
         <Button
             android:id="@+id/profileBirthdayDateButton"

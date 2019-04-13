@@ -37,6 +37,9 @@ public class User implements Serializable {
     @SerializedName("email_address")
     public String email;
 
+    @SerializedName("telephone")
+    public String telephone;
+
     @SerializedName("birth_date")
     public String birthDate;
 
@@ -59,10 +62,10 @@ public class User implements Serializable {
     public String stayingCity;
 
     @SerializedName("max_budget")
-    public int maxBudget;
+    public Integer maxBudget;
 
     @SerializedName("smoker")
-    public boolean smokes;
+    public Boolean smokes;
 
     @SerializedName("occupation")
     public String occupation;

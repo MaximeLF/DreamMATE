@@ -2,10 +2,6 @@
 'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const country_List = require('country-list');
-const language_List = require('langs');
-const countries = country_List.getNames();
-const languages = language_List.names();
 const film_types = ['action', 'romantic', 'comedy','science fiction','documentary','thriller','horror','adventure','historical drama'];
 
 let UserSchema = new Schema({
@@ -32,17 +28,17 @@ let UserSchema = new Schema({
             enum: ['male', 'female']
         }
     },
-    origin_country:{
-        type: {
-            type: String,
-            enum: countries
-        },
+    staying_city:{
+        type: String,
+    },
+    staying_country:{
+        type: String,
+    },
+    origin_countries:{
+        type: [String],
     },
     languages_spoken:{
-        type: [{
-            type: String,
-            enum: languages
-        }],
+        type: [String],
     },
     Created_date: {
         type: Date,
@@ -77,8 +73,28 @@ let UserSchema = new Schema({
             type: String,
             enum: ['9:00-10:00','10:00-12:00','12:00+']
         },
+    },
+    matches:{
+        type: [Schema.ObjectId]
+    },
+    occupation:{
+        type:{
+            type: String,
+            enum: ['Local student', 'International student', 'Worker','Other']
+        }
+    },
+    description:{
+        type: String,
+    },
+    music:{
+        type: String,
+    },
+    sports:{
+        type:String,
+    },
+    avatar:{
+        type: Number
     }
 });
 
 module.exports = mongoose.model('Users', UserSchema);
-exports.film_type = film_types;

@@ -1,6 +1,8 @@
 package com.dreammate;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -30,6 +32,7 @@ import model.User;
 import tasks.GetCitiesForCountryTask;
 import tasks.GetCountryListTask;
 import tasks.GetLanguageListTask;
+import tasks.GetUserInfoTask;
 import tasks.SendUserInfoTask;
 
 public class MyProfileActivity extends AppCompatActivity
@@ -58,8 +61,11 @@ public class MyProfileActivity extends AppCompatActivity
     private RadioGroup smokerRadioGroup;
     private RadioGroup occupationRadioGroup;
 
+    private EditText telephoneEdit;
+    private EditText budgetEdit;
     private EditText descriptionEdit;
 
+    private ProgressDialog dialog;
 
     private void findViews()
     {
@@ -78,6 +84,8 @@ public class MyProfileActivity extends AppCompatActivity
         smokerRadioGroup = findViewById(R.id.smokeRadioGroup);
         occupationRadioGroup = findViewById(R.id.occupationRadioGroup);
 
+        telephoneEdit = findViewById(R.id.profileTelephoneEdit);
+        budgetEdit = findViewById(R.id.profileBudgetEdit);
         descriptionEdit = findViewById(R.id.profileDescriptionEdit);
     }
 
@@ -89,6 +97,11 @@ public class MyProfileActivity extends AppCompatActivity
 
         findViews();
 
+        dialog = ProgressDialog.show(MyProfileActivity.this, "",
+                "Loading. Please wait...", true);
+        dialog.show();
+
+
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +112,11 @@ public class MyProfileActivity extends AppCompatActivity
         new GetCountryListTask(this).execute();
 
         new GetLanguageListTask(this).execute();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String id = sp.getString("user_id", "");
+
+        new GetUserInfoTask(this).execute(id);
 
 
         originCountriesMultiAutoComplete.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries));
@@ -211,6 +229,13 @@ public class MyProfileActivity extends AppCompatActivity
                         }, year, month, day);
                 picker.getDatePicker().setMinDate(moveInDate.getTime());
                 picker.show();
+                picker.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        moveOutDate = null;
+                        moveOutDateButton.setText(R.string.select_date);
+                    }
+                });
             }
         });
 
@@ -275,6 +300,20 @@ public class MyProfileActivity extends AppCompatActivity
         user.id = id;
         user.firstName = firstName;
         user.lastName = lastName;
+
+
+
+
+        String telephone = telephoneEdit.getText().toString().trim();
+
+        if (telephone.length() == 0) {
+            Toast.makeText(this,getString(R.string.select_telephone), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        user.telephone = telephone;
+
+
 
 
         if (birthDate == null) {
@@ -362,7 +401,7 @@ public class MyProfileActivity extends AppCompatActivity
 
 
         if (moveInDate == null) {
-            Toast.makeText(this, getString(R.string.select_birth_date), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.select_move_in), Toast.LENGTH_SHORT).show();
             return;
         }
         calendar.setTime(moveInDate);
@@ -377,19 +416,22 @@ public class MyProfileActivity extends AppCompatActivity
 
 
         if (moveOutDate != null) {
-            calendar.setTime(moveInDate);
+            calendar.setTime(moveOutDate);
             day = calendar.get(Calendar.DAY_OF_MONTH);
             month = calendar.get(Calendar.MONTH) + 1;
             year = calendar.get(Calendar.YEAR);
 
             user.departureDate = year + "-" + month + "-" + day;
         }
+        else {
+            user.departureDate = "";
+        }
 
 
 
 
         try {
-            int budget = Integer.parseInt(((EditText) findViewById(R.id.profileBudgetEdit)).getText().toString());
+            int budget = Integer.parseInt(budgetEdit.getText().toString());
             user.maxBudget = budget;
         }
         catch (Exception e) {
@@ -472,7 +514,7 @@ public class MyProfileActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), getString(R.string.user_info_success), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            finish();
             startActivity(intent);
         }
         else {
@@ -481,12 +523,163 @@ public class MyProfileActivity extends AppCompatActivity
     }
 
 
-    public void onUserInfoReceived(User user) {
+    public void onUserInfoReceived(User user)
+    {
+        dialog.dismiss();
+
+        Log.d("lua", "Dismissed loading");
+
         if (user == null) {
-
+            return;
         }
-        else {
 
+
+        if (user.telephone != null) {
+            telephoneEdit.setText(user.telephone);
+            telephoneEdit.setSelection(user.telephone.length());
+        }
+
+
+        if (user.birthDate != null) {
+            int year, month, day;
+            String [] parts = user.birthDate.split("-");
+            year = Integer.parseInt(parts[0]);
+            month = Integer.parseInt(parts[1]);
+            day = Integer.parseInt(parts[2].substring(0, 2));
+
+            Calendar cldr = Calendar.getInstance();
+            cldr.set(year, month - 1, day, 0, 0);
+
+            birthDate = new Date(cldr.getTimeInMillis());
+            birthDateButton.setText(day + "/" + month + "/" + year);
+        }
+
+
+        if (user.gender != null) {
+            if (user.gender.equals(getString(R.string.female))) {
+                genderRadioGroup.check(R.id.radio_female);
+            }
+            else if (user.gender.equals(getString(R.string.male))) {
+                genderRadioGroup.check(R.id.radio_male);
+            }
+            else {
+                genderRadioGroup.check(R.id.radio_other);
+            }
+        }
+
+
+        if (user.originCountries != null && user.originCountries.size() != 0) {
+            String helper = "";
+            for (int i = 0; i < user.originCountries.size(); i++) {
+                helper += user.originCountries.get(i) + ", ";
+            }
+            originCountriesMultiAutoComplete.setText(helper);
+            originCountriesMultiAutoComplete.setSelection(helper.length());
+        }
+
+
+        if (user.languagesSpoken != null && user.languagesSpoken.size() != 0) {
+            String helper = "";
+            for (int i = 0; i < user.languagesSpoken.size(); i++) {
+                helper += user.languagesSpoken.get(i) + ", ";
+            }
+            spokenLanguagesMultiAutoComplete.setText(helper);
+            spokenLanguagesMultiAutoComplete.setSelection(helper.length());
+        }
+
+
+        if (user.stayingCountry != null) {
+            wantedCountryAutoComplete.setText(user.stayingCountry);
+            wantedCountryAutoComplete.setSelection(user.stayingCountry.length());
+        }
+
+
+        if (user.stayingCity != null) {
+            wantedCityAutoComplete.setText(user.stayingCity);
+            wantedCityAutoComplete.setSelection(user.stayingCity.length());
+        }
+
+
+        if (user.arrivalDate != null) {
+            int year, month, day;
+            String [] parts = user.arrivalDate.split("-");
+            year = Integer.parseInt(parts[0]);
+            month = Integer.parseInt(parts[1]);
+            day = Integer.parseInt(parts[2].substring(0, 2));
+
+            Calendar cldr = Calendar.getInstance();
+            cldr.set(year, month - 1, day, 0, 0);
+
+            moveInDate = new Date(cldr.getTimeInMillis());
+            moveInDateButton.setText(day + "/" + month + "/" + year);
+        }
+
+
+        if (user.departureDate != null) {
+            int year, month, day;
+            String [] parts = user.departureDate.split("-");
+            year = Integer.parseInt(parts[0]);
+            month = Integer.parseInt(parts[1]);
+            day = Integer.parseInt(parts[2].substring(0, 2));
+
+            Calendar cldr = Calendar.getInstance();
+            cldr.set(year, month - 1, day, 0, 0);
+
+            moveOutDate = new Date(cldr.getTimeInMillis());
+            moveOutDateButton.setText(day + "/" + month + "/" + year);
+        }
+
+
+        if (user.maxBudget != null) {
+            budgetEdit.setText(Integer.toString(user.maxBudget));
+            budgetEdit.setSelection(budgetEdit.getText().toString().length());
+        }
+
+
+        if (user.sleepTime != null) {
+            if (user.sleepTime.equals(getString(R.string.radio_9_10))) {
+                sleepTimeRadioGroup.check(R.id.radio_9_10);
+            }
+            else if (user.sleepTime.equals(getString(R.string.radio_10_12))) {
+                sleepTimeRadioGroup.check(R.id.radio_10_12);
+            }
+            else {
+                sleepTimeRadioGroup.check(R.id.radio_12_plus);
+            }
+        }
+
+
+        if (user.smokes != null) {
+            if (user.smokes) {
+                smokerRadioGroup.check(R.id.radio_yes);
+            }
+            else {
+                smokerRadioGroup.check(R.id.radio_no);
+            }
+        }
+
+
+        if (user.occupation != null) {
+            if (user.occupation.equals(getString(R.string.local_student))) {
+                occupationRadioGroup.check(R.id.radio_lStudent);
+            }
+            else if (user.occupation.equals(getString(R.string.international_student))) {
+                occupationRadioGroup.check(R.id.radio_iStudent);
+            }
+            else if (user.occupation.equals(getString(R.string.work))) {
+                occupationRadioGroup.check(R.id.radio_work);
+            }
+            else {
+                occupationRadioGroup.check(R.id.radio_life);
+            }
+        }
+
+
+        if (user.description != null) {
+            descriptionEdit.setText(user.description);
+            descriptionEdit.setSelection(user.description.length());
         }
     }
+
+
 }

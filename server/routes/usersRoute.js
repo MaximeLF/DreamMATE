@@ -22,4 +22,10 @@ module.exports = function(app) {
 
     app.route('/film_types')
         .get(user.film_types);
+
+    app.route('/cities_of_country/:country')
+        .get(user.cities_of_country);
+
+    app.route('/matches/:id')
+        .put(user.match)
 };

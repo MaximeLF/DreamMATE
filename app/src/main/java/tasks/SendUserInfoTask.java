@@ -69,17 +69,7 @@ public class SendUserInfoTask extends AsyncTask<User, Void, Boolean>
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
                 {
-                    InputStreamReader reader = new InputStreamReader(connection.getInputStream());
-                    Scanner s = new Scanner(reader).useDelimiter("\\A");
-
-                    String answer = s.hasNext() ? s.next() : "";
-                    Log.d("lua", "Received user : " + answer);
-
-                    User receivedUser = gson.fromJson(answer, User.class);
-
-                    reader.close();
-                    connection.disconnect();
-
+                    Log.d("lua", "User info successfully updated");
                     return true;
                 }
             }

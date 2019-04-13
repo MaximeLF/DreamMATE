@@ -48,28 +48,28 @@
 
     <string name="movies">Which kinds of movies do you like?</string>
     <string name="movie_hint">Select types of movies</string>
-    <string name="date_of_birth">Date of birth</string>
+    <string name="date_of_birth">When were you born?</string>
     <string name="date_hint">dd/mm/yyyy</string>
-    <string name="sleep_time">At what time do you usually go to sleep?</string>
-    <string name="origin_countries">Which countries do you come from?</string>
+    <string name="sleep_time">At what time do you usually go to sleep?*</string>
+    <string name="origin_countries">Which countries do you come from?*</string>
     <string name="origin_countries_hint">Select countries</string>
-    <string name="languages">Which languages can you speak?</string>
+    <string name="languages">Which languages can you speak?*</string>
     <string name="language_hint">Select languages</string>
-    <string name="wanted_country">In which country are you looking for a flat?</string>
+    <string name="wanted_country">In which country are you looking for a flat?*</string>
     <string name="wanted_country_hint">Select country</string>
-    <string name="wanted_city">And in which city?</string>
+    <string name="wanted_city">And in which city?*</string>
     <string name="wanted_city_hint">Select city</string>
-    <string name="move_in_date">Move in date</string>
+    <string name="move_in_date">Move in date*</string>
     <string name="move_out_date">Move out date</string>
-    <string name="budget">What\'s your maximum monthly budget? </string>
+    <string name="budget">What\'s your maximum monthly budget?*</string>
     <string name="select_date">Select date</string>
     <string name="budget_hint">Insert monthly budget</string>
     <string name="select_move_in">Please select the move in date first!</string>
-    <string name="smoke">Do you smoke?</string>
+    <string name="smoke">Do you smoke?*</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="finish">Finish</string>
-    <string name="occupation">What do you do for a living?</string>
+    <string name="occupation">What do you do for a living?*</string>
     <string name="local_student">I\'m a local student</string>
     <string name="international_student">I\'m an international student</string>
     <string name="work">I work</string>
@@ -97,4 +97,9 @@
     <string name="select_smoker">Please specify whether you\'re a smoker or not!</string>
     <string name="select_occupation">Please choose the occupation that best fits you!</string>
     <string name="select_country_first">Select a country first!</string>
+
+
+    <string name="telephone">What is your telephone number?</string>
+    <string name="select_telephone">Please enter your telephone number!</string>
+    <string name="telephone_hint">Enter telephone number</string>
 </resources>

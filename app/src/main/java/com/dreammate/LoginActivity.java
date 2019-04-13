@@ -46,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     public void startLogin()
     {
         String email = emailEdit.getText().toString();
