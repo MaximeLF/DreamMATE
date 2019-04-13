@@ -34,7 +34,8 @@ public class GetUserInfoTask extends AsyncTask<String, Void, User>
 
 
     @Override
-    protected User doInBackground(String... strings) {
+    protected User doInBackground(String... strings)
+    {
         String userId = strings[0];
 
         if (actWeakRef != null) {
@@ -81,6 +82,7 @@ public class GetUserInfoTask extends AsyncTask<String, Void, User>
                 Log.e("lua", e.toString());
             }
         }
+        Log.e("lua", "No user gotten");
         return null;
     }
 

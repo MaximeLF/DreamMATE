@@ -73,12 +73,7 @@ public class SendUserInfoTask extends AsyncTask<User, Void, Boolean>
                     Scanner s = new Scanner(reader).useDelimiter("\\A");
 
                     String answer = s.hasNext() ? s.next() : "";
-                    Log.d("lua", "Received user : " + answer);
-
-                    User receivedUser = gson.fromJson(answer, User.class);
-
-                    reader.close();
-                    connection.disconnect();
+                    Log.d("lua", "Received answer : " + answer);
 
                     return true;
                 }
