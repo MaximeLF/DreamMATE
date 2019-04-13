@@ -53,7 +53,7 @@ public class GetMatchesForUserTask extends AsyncTask<String, Void, List<User>> {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("Content-Type", "application/json");
 
-                connection.setRequestMethod("GET");
+                connection.setRequestMethod("PUT");
                 connection.setDoInput(true);
 
 
