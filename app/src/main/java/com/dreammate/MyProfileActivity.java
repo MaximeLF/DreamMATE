@@ -277,8 +277,6 @@ public class MyProfileActivity extends AppCompatActivity
         user.lastName = lastName;
 
 
-
-
         if (birthDate == null) {
             Toast.makeText(this, getString(R.string.select_birth_date), Toast.LENGTH_SHORT).show();
             return;
@@ -291,7 +289,6 @@ public class MyProfileActivity extends AppCompatActivity
         String birthDateString = year + "-" + month + "-" + day;
 
         user.birthDate = birthDateString;
-
 
 
 

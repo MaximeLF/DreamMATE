@@ -11,12 +11,13 @@ import android.widget.TextView;
 import com.dreammate.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomAdapter extends ArrayAdapter<User> {
 
     private int layout;
     private Context context;
-    public CustomAdapter(Context context, int resource, ArrayList<User> data){
+    public CustomAdapter(Context context, int resource, List<User> data){
 
         super(context, resource, data);
         this.layout = resource;
@@ -36,16 +37,17 @@ public class CustomAdapter extends ArrayAdapter<User> {
         //ImageButton image = getItem(position).getImage();
         String fname = getItem(position).getFirstName();
         String lname = getItem(position).getLastName();
+        String age = getItem(position).getAge();
         String description = getItem(position).getDescription();
+        String profileInfo = fname + " " + lname + " " + age;
 
-        TextView tvFname = (TextView) view.findViewById(R.id.firstName);
-        TextView tvLname = (TextView) view.findViewById(R.id.lastName);
         TextView tvDescription = (TextView) view.findViewById(R.id.description);
+        TextView tvProfileInfo = (TextView) view.findViewById(R.id.profileInfo);
 
-        tvFname.setText(fname);
-        tvLname.setText(lname);
+        tvProfileInfo.setText(profileInfo);
         tvDescription.setText(description);
 
         return view;
     }
+
 }

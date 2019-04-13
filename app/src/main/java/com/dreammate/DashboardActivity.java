@@ -1,7 +1,9 @@
 package com.dreammate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -9,17 +11,25 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.CustomAdapter;
 import model.User;
+import tasks.GetMatchesForUserTask;
+import tasks.GetUserInfoTask;
 
 public class DashboardActivity extends AppCompatActivity {
+
+
+    List<User> users = new ArrayList<User>();
+    User user = new User();
 
     private TextView mTextMessage;
     private LinearLayout profile;
@@ -51,34 +61,16 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        getUserInfo();
+        new GetMatchesForUserTask(this).execute(user.id);
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Button logout = (Button) findViewById(R.id.dashboardLogout);
+        Button logout = (Button) findViewById(R.id.dashboardLogout);
 
-        final ArrayList<User> list = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-
-            User user = new User("John", "Doe", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.");
-            list.add(user);
-        }
-
-        CustomAdapter adapter = new CustomAdapter(this, R.layout.activity_custom_layout, list);
-        ListView l = (ListView) findViewById(R.id.listView);
-        l.setAdapter(adapter);
-
-        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("Nuno", "funciona");
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                intent.putExtra("First Name", list.get(position).getFirstName());
-                intent.putExtra("Last Name", list.get(position).getLastName());
-                startActivity(intent);
-            }
-        });
-        /*logout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 User.logout(getApplicationContext());
@@ -86,7 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-        });*/
+        });
 
 
         /*Button continueRegistration = (Button) findViewById(R.id.dashboardContinueRegistration);
@@ -100,9 +92,38 @@ public class DashboardActivity extends AppCompatActivity {
         });*/
     }
 
-    public void onMatchesComputed(List<User> users){
+    public void getUserInfo(){
 
-        
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String id = sp.getString("user_id", "");
+
+        user.id = id;
+    }
+
+    public void onMatchesComputed(List<User> result){
+
+        if(result != null) {
+            Log.d("nuno", result.toString());
+            users = new ArrayList<User>(result);
+
+            CustomAdapter adapter = new CustomAdapter(this, R.layout.activity_custom_layout, users);
+            ListView l = (ListView) findViewById(R.id.listView);
+            l.setAdapter(adapter);
+
+            l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.d("Nuno", "funciona");
+                    User selectedUserProfile = users.get(position);
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    intent.putExtra("user", selectedUserProfile);
+                    startActivity(intent);
+                }
+            });
+        }
+        else {
+            Toast.makeText(this, "No one likes you", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
