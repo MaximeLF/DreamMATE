@@ -13,13 +13,23 @@ import tasks.CheckUserLoginTask;
 
 public class LoginActivity extends AppCompatActivity {
 
+    Button registerButton;
+    Button loginButton;
+    EditText emailEdit;
+    EditText passwordEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button register = (Button) findViewById(R.id.loginRegister);
-        register.setOnClickListener(new View.OnClickListener() {
+        registerButton = findViewById(R.id.loginRegister);
+        loginButton = findViewById(R.id.loginSignIn);
+
+        emailEdit = findViewById(R.id.loginEmailEdit);
+        passwordEdit = findViewById(R.id.loginPasswordEdit);
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
@@ -27,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button login = (Button) findViewById(R.id.loginSignIn);
-        login.setOnClickListener(new View.OnClickListener() {
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startLogin();
@@ -38,11 +48,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void startLogin()
     {
-        String email = ((EditText) findViewById(R.id.loginEmailEdit)).getText().toString();
-        String password = ((EditText) findViewById(R.id.loginPasswordEdit)).getText().toString();
+        String email = emailEdit.getText().toString();
+        String password = passwordEdit.getText().toString();
 
-        if (email.length() * password.length() == 0)
-        {
+        if (email.length() * password.length() == 0) {
             Toast.makeText(getApplicationContext(), getString(R.string.fill_fields), Toast.LENGTH_SHORT).show();
             return;
         }
@@ -53,12 +62,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void confirmLogin(User user)
     {
-        if (user == null)
-        {
+        if (user == null) {
             Toast.makeText(getApplicationContext(), getString(R.string.server_error), Toast.LENGTH_SHORT).show();
         }
-        else if (user.id == null || user.id.equals(""))
-        {
+        else if (user.id == null || user.id.equals("")) {
             Toast.makeText(getApplicationContext(), getString(R.string.wrong_credentials), Toast.LENGTH_SHORT).show();
         }
         else {
