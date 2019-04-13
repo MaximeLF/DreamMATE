@@ -17,32 +17,32 @@ public class CustomAdapter extends ArrayAdapter<User> {
 
     private int layout;
     private Context context;
-    public CustomAdapter(Context context, int resource, List<User> data){
 
+    public CustomAdapter(Context context, int resource, List<User> data)
+    {
         super(context, resource, data);
         this.layout = resource;
         this.context = context;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent){
-
+    public View getView(final int position, View convertView, ViewGroup parent)
+    {
         View view = convertView;
-        if(view == null){
+        if (view == null) {
 
             LayoutInflater inflater = LayoutInflater.from(context);
             view = inflater.inflate(this.layout, parent, false);
         }
 
-        //ImageButton image = getItem(position).getImage();
         String fname = getItem(position).getFirstName();
         String lname = getItem(position).getLastName();
-        String age = getItem(position).getAge();
+        String age = Integer.toString(getItem(position).getAge());
         String description = getItem(position).getDescription();
         String profileInfo = fname + " " + lname + " " + age;
 
-        TextView tvDescription = (TextView) view.findViewById(R.id.description);
-        TextView tvProfileInfo = (TextView) view.findViewById(R.id.profileInfo);
+        TextView tvDescription = view.findViewById(R.id.description);
+        TextView tvProfileInfo = view.findViewById(R.id.profileInfo);
 
         tvProfileInfo.setText(profileInfo);
         tvDescription.setText(description);

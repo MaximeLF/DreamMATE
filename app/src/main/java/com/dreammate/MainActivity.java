@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         Intent intent;
-        if (sp.getString("user_id", "").equals("")) {
+        if (sp.getString("user", "").equals("")) {
             intent = new Intent(this, LoginActivity.class);
         }
         else {

@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -141,9 +142,10 @@ public class User implements Serializable {
     {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         SharedPreferences.Editor ed = sp.edit();
-        ed.putString("user_id", id);
-        ed.putString("first_name", firstName);
-        ed.putString("last_name", lastName);
+
+        Gson gson = new Gson();
+        String userString = gson.toJson(this);
+        ed.putString("user", userString);
         ed.apply();
     }
 
@@ -151,13 +153,11 @@ public class User implements Serializable {
     {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor ed = sp.edit();
-        ed.remove("user_id");
-        ed.remove("first_name");
-        ed.remove("last_name");
+        ed.remove("user");
         ed.apply();
     }
 
-    public String getAge(){
+    public int getAge() {
         int year, month, day;
         String [] parts = birthDate.split("-");
         year = Integer.parseInt(parts[0]);
@@ -174,15 +174,21 @@ public class User implements Serializable {
         if (now.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
             age--;
         }
-        Integer ageInt = new Integer(age);
-        String ageS = ageInt.toString();
+        return age;
+    }
 
-        return ageS;
-
+    public String fullName() {
+        if (lastName != null) {
+            return firstName + " " + lastName;
+        }
+        else {
+            return firstName;
+        }
     }
 
     @Override
     public String toString() {
-        return id + " " + firstName + " " + lastName + " " + email + " " + encrypted;
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

@@ -22,6 +22,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,6 +39,8 @@ import tasks.SendUserInfoTask;
 
 public class MyProfileActivity extends AppCompatActivity
 {
+    User user;
+
     MyProfileActivity thisActivity = this;
     List<String> countries = new ArrayList<String>();
     List<String> languages = new ArrayList<String>();
@@ -89,16 +93,32 @@ public class MyProfileActivity extends AppCompatActivity
         descriptionEdit = findViewById(R.id.profileDescriptionEdit);
     }
 
+    public boolean getUserInfo()
+    {
+        user = new User();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String userString = sp.getString("user", "");
+        Gson gson = new Gson();
+
+        if (!userString.equals("")) {
+            user = gson.fromJson(userString, User.class);
+            Log.d("lua", userString);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+        getUserInfo();
+
         findViews();
 
-        dialog = ProgressDialog.show(MyProfileActivity.this, "",
-                "Loading. Please wait...", true);
+        dialog = ProgressDialog.show(MyProfileActivity.this, "", "Loading. Please wait...", true);
         dialog.show();
 
 
@@ -110,13 +130,8 @@ public class MyProfileActivity extends AppCompatActivity
         });
 
         new GetCountryListTask(this).execute();
-
         new GetLanguageListTask(this).execute();
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String id = sp.getString("user_id", "");
-
-        new GetUserInfoTask(this).execute(id);
+        new GetUserInfoTask(this).execute(user.id);
 
 
         originCountriesMultiAutoComplete.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries));
@@ -290,19 +305,6 @@ public class MyProfileActivity extends AppCompatActivity
 
     public void tryToSendUserInfo()
     {
-        User user = new User();
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String id = sp.getString("user_id", "");
-        String firstName = sp.getString("first_name", "");
-        String lastName = sp.getString("last_name", "");
-
-        user.id = id;
-        user.firstName = firstName;
-        user.lastName = lastName;
-
-
-
 
         String telephone = telephoneEdit.getText().toString().trim();
 
@@ -682,4 +684,18 @@ public class MyProfileActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        String caller = getIntent().getStringExtra("callingFrom");
+
+
+        if (caller.equals("Dashboard")) {
+            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+            startActivity(intent);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }

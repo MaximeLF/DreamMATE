@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/homeMenuItem" android:title="Home" android:icon="@drawable/ic_home_black_24dp"/>
+    <item android:id="@+id/matchesMenuItem" android:title="My matches" android:icon="@drawable/ic_supervisor_account_black_24dp"/>
+    <item android:id="@+id/myProfileMenuItem" android:title="My profile" android:icon="@drawable/ic_person_black_24dp"/>
+    <item android:id="@+id/aboutMenuItem" android:title="About" android:icon="@drawable/ic_info_outline_black_24dp"/>
+    <item android:id="@+id/logoutMenuItem" android:title="Log out" android:icon="@drawable/ic_power_settings_new_black_24dp"/>
+
+</menu>

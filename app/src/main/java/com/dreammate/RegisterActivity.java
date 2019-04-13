@@ -76,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.login(this);
 
             Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
+            intent.putExtra("callingFrom", "Register");
             startActivity(intent);
         }
         else {
