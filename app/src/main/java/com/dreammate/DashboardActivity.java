@@ -1,5 +1,6 @@
 package com.dreammate;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,9 +12,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +28,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.CustomAdapter;
 import model.User;
 import tasks.GetMatchesForUserTask;
 
@@ -47,6 +50,12 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+
+        if (!getUserInfo()) {
+            return;
+        }
+
+
         myDrawerLayout = findViewById(R.id.dashboard_drawer);
         myNavigationView = findViewById(R.id.dashboard_navigation);
 
@@ -56,6 +65,19 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         navigationEmail = headerView.findViewById(R.id.navigationEmail);
         navigationAvatar = headerView.findViewById(R.id.navigationImage);
 
+        navigationName.setText(user.fullName());
+        navigationEmail.setText(user.email);
+
+        if (user.gender.equals(getString(R.string.female))) {
+            navigationAvatar.setImageResource(R.drawable.girl_avatar);
+        }
+        else if (user.gender.equals(getString(R.string.male))) {
+            navigationAvatar.setImageResource(R.drawable.male_avatar);
+        }
+        else {
+            navigationAvatar.setImageResource(R.drawable.other_avatar);
+        }
+
 
 
         myNavigationView.setNavigationItemSelectedListener(this);
@@ -64,27 +86,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         myToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (!getUserInfo()) {
-            return;
-        }
-
         new GetMatchesForUserTask(this).execute(user.id);
 
-        navigationName.setText(user.fullName());
-        navigationEmail.setText(user.email);
 
-
-        /*logoutButton = findViewById(R.id.dashboardLogout);
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User.logout(getApplicationContext());
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-
-        });*/
     }
 
 
@@ -174,6 +178,59 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         else {
             super.onBackPressed();
         }
+    }
+
+    public class CustomAdapter extends ArrayAdapter<User> {
+
+        private int layout;
+        private Context context;
+
+        public CustomAdapter(Context context, int resource, List<User> data)
+        {
+            super(context, resource, data);
+            this.layout = resource;
+            this.context = context;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent)
+        {
+            View view = convertView;
+            if (view == null) {
+
+                LayoutInflater inflater = LayoutInflater.from(context);
+                view = inflater.inflate(this.layout, parent, false);
+            }
+
+            String gender = getItem(position).getGender();
+            String fname = getItem(position).getFirstName();
+            String lname = getItem(position).getLastName();
+            String age = Integer.toString(getItem(position).getAge());
+            String description = getItem(position).getDescription();
+            String profileInfo = fname + " " + lname + " " + age;
+            TextView tvDescription = view.findViewById(R.id.description);
+            TextView tvProfileInfo = view.findViewById(R.id.profileInfo);
+
+            tvProfileInfo.setText(profileInfo);
+            tvDescription.setText(description);
+
+            ImageView avatar = view.findViewById(R.id.avatar);
+
+            if(gender.equals("Female")){
+                avatar.setImageResource(R.drawable.girl_avatar);
+            }
+
+            else if(gender.equals("Male")){
+                avatar.setImageResource(R.drawable.male_avatar);
+            }
+
+            else{
+                avatar.setImageResource(R.drawable.other_avatar);
+            }
+
+            return view;
+        }
+
     }
 
 }

@@ -68,14 +68,7 @@ public class CheckUserLoginTask extends AsyncTask<User, Void, User>
                     reader.close();
                     connection.disconnect();
 
-                    if (receivedUser.id.length() == 0) {
-                        return user;
-                    }
-                    user.id = receivedUser.id;
-                    user.firstName = receivedUser.firstName;
-                    user.lastName = receivedUser.lastName;
-
-                    return user;
+                    return receivedUser;
                 }
                 else {
                     Log.d("lua", "Response code was NOT OK");

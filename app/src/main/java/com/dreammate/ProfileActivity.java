@@ -73,6 +73,17 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void fillViewsWithUserInfo() {
+        if (viewedUser.gender.equals(getString(R.string.male))) {
+            profileImage.setImageResource(R.drawable.male_avatar);
+        }
+        else if (viewedUser.gender.equals(getString(R.string.female))) {
+            profileImage.setImageResource(R.drawable.girl_avatar);
+        }
+        else {
+            profileImage.setImageResource(R.drawable.other_avatar);
+        }
+
+
         String name = viewedUser.fullName();
         nameTV.setText(name);
 
