@@ -699,6 +699,7 @@ public class MyProfileActivity extends AppCompatActivity
         if (caller.equals("Dashboard")) {
             Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
             startActivity(intent);
+            finish();
         }
         else {
             super.onBackPressed();
