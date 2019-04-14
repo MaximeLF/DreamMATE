@@ -137,6 +137,8 @@ public class User implements Serializable {
     public String getDescription(){ return description;}
     public String getBirthdayDate(){ return birthDate;}
     public String getId(){ return id;}
+    public String getGender(){ return gender;}
+
 
     public void login(AppCompatActivity activity)
     {
