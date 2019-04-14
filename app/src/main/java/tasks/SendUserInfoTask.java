@@ -44,7 +44,6 @@ public class SendUserInfoTask extends AsyncTask<User, Void, Boolean>
             builder.appendPath("dev");
             builder.appendPath("users");
             builder.appendPath(user.id);
-            user.id = null;
 
             try {
                 Gson gson = new GsonBuilder().create();

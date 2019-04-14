@@ -95,14 +95,13 @@ public class MyProfileActivity extends AppCompatActivity
 
     public boolean getUserInfo()
     {
-        user = new User();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String userString = sp.getString("user", "");
         Gson gson = new Gson();
 
         if (!userString.equals("")) {
             user = gson.fromJson(userString, User.class);
-            Log.d("lua", userString);
+            Log.d("lua", "Retrieved user from preferences: " + userString);
             return true;
         }
         return false;
@@ -514,6 +513,15 @@ public class MyProfileActivity extends AppCompatActivity
         if (worked) {
             Toast.makeText(getApplicationContext(), getString(R.string.user_info_success), Toast.LENGTH_SHORT).show();
 
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor e = sp.edit();
+
+            Gson gson = new Gson();
+
+            e.putString("user", gson.toJson(user));
+
+            e.apply();
+
             Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
             finish();
             startActivity(intent);
@@ -687,7 +695,6 @@ public class MyProfileActivity extends AppCompatActivity
     public void onBackPressed() {
         finish();
         String caller = getIntent().getStringExtra("callingFrom");
-
 
         if (caller.equals("Dashboard")) {
             Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);

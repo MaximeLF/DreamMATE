@@ -78,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
             intent.putExtra("callingFrom", "Register");
             startActivity(intent);
+            finish();
         }
         else {
             Toast.makeText(getApplicationContext(), getString(R.string.server_error), Toast.LENGTH_SHORT).show();
