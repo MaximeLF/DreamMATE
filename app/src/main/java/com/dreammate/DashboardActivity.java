@@ -87,8 +87,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         new GetMatchesForUserTask(this).execute(user.id);
-
-
     }
 
 

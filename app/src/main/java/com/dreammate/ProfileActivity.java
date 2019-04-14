@@ -87,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
         String name = viewedUser.fullName();
         nameTV.setText(name);
 
-        String age = Integer.toString(viewedUser.getAge());
+        String age = Integer.toString(viewedUser.getAge()) + " " + getString(R.string.years);
         ageTV.setText(age);
 
         String email = viewedUser.email;
