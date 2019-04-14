@@ -121,7 +121,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 myDrawerLayout.closeDrawers();
             }
             case R.id.aboutMenuItem: {
-
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
             }
             default:
 

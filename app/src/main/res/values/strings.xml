@@ -117,4 +117,10 @@
     <string name="sleepProfile">Usually sleeps at:</string>
     <string name="occupationProfile">Occupation:</string>
     <string name="descriptionProfile">Description</string>
+
+    <string name="brought_by">Brought to you by:</string>
+    <string name="nuno">Nuno Nunes</string>
+    <string name="maxime">Maxime Le Feuvre</string>
+    <string name="teresa">Teresa Romão</string>
+    <string name="lua">Luã Streit</string>
 </resources>

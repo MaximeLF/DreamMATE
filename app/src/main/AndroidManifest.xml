@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AboutActivity"></activity>
         <activity
             android:name=".ProfileActivity"
             android:parentActivityName=".DashboardActivity">
@@ -22,7 +23,7 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".DashboardActivity" />
         <activity
             android:name=".MyProfileActivity"
@@ -31,7 +32,6 @@
             android:name=".RegisterActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
