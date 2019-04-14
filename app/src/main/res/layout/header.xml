@@ -16,13 +16,13 @@
         android:id="@+id/navigationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/dark_grey"
+        android:textColor="@color/darkGray"
         android:textStyle="bold"
         android:layout_marginTop="5dp"/>
     <TextView
         android:id="@+id/navigationEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/dark_grey"/>
+        android:textColor="@color/darkGray"/>
 
 </LinearLayout>
