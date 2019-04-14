@@ -59,7 +59,7 @@ exports.read_a_user = function(req, res){
 
 exports.authentication = function (req, res) {
     connectToDatabase().then(()=>{
-        User.find({email_address : req.params.email_address, encrypted_password : req.params.encrypted_password},'_id first_name last_name',function (err, user){
+        User.find({email_address : req.params.email_address, encrypted_password : req.params.encrypted_password},'_id first_name last_name gender',function (err, user){
             if(err){
                 res.status(err.status || 500);
                 res.send(err);

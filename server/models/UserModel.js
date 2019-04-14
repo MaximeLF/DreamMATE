@@ -28,7 +28,7 @@ let UserSchema = new Schema({
     gender:{
         type: {
             type: String,
-            enum: ['male', 'female']
+            enum: ['male', 'female','other']
         }
     },
     staying_city:{

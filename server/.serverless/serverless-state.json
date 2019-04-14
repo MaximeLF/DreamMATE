@@ -117,7 +117,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/DreamMATE-rest-api/dev/1555185530561-2019-04-13T19:58:50.561Z/DreamMATE-rest-api.zip"
+                "S3Key": "serverless/DreamMATE-rest-api/dev/1555247180887-2019-04-14T13:06:20.887Z/DreamMATE-rest-api.zip"
               },
               "FunctionName": "DreamMATE-rest-api-dev-app",
               "Handler": "bin/www.handler",
@@ -136,14 +136,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionUpbBM3q8VWQ78yyMtFy85rnJvEo5kmXhirLkAoi1K0": {
+          "AppLambdaVersionum8ejkojMnV08CIbA8QBj9lVjJAwURWzed40Z1Vc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "9gqrJtyDL7fjVeXFRuzl00rru+7rxNjfC/vgnDGYP6U="
+              "CodeSha256": "0wL7FJnChfPQEU4znhgxAttvcP8IRQfcbltG2Ft/B40="
             }
           },
           "ApiGatewayRestApi": {
@@ -1128,7 +1128,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1555185530609": {
+          "ApiGatewayDeployment1555247180935": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1214,7 +1214,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionUpbBM3q8VWQ78yyMtFy85rnJvEo5kmXhirLkAoi1K0"
+              "Ref": "AppLambdaVersionum8ejkojMnV08CIbA8QBj9lVjJAwURWzed40Z1Vc"
             }
           },
           "ServiceEndpoint": {
@@ -1548,7 +1548,7 @@
     "artifact": "/Users/maxime/Documents/INSA/UPV/DevMobile/projet/server/.serverless/DreamMATE-rest-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/DreamMATE-rest-api/dev/1555185530561-2019-04-13T19:58:50.561Z",
+    "artifactDirectoryName": "serverless/DreamMATE-rest-api/dev/1555247180887-2019-04-14T13:06:20.887Z",
     "artifact": "DreamMATE-rest-api.zip"
   }
 }
