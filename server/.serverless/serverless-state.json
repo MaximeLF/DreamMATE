@@ -117,7 +117,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/DreamMATE-rest-api/dev/1555169558062-2019-04-13T15:32:38.062Z/DreamMATE-rest-api.zip"
+                "S3Key": "serverless/DreamMATE-rest-api/dev/1555185530561-2019-04-13T19:58:50.561Z/DreamMATE-rest-api.zip"
               },
               "FunctionName": "DreamMATE-rest-api-dev-app",
               "Handler": "bin/www.handler",
@@ -136,14 +136,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersion0brbcy16N4BihcQ9iLX2cs9gKf2geEhuwSbQ11VdMc": {
+          "AppLambdaVersionUpbBM3q8VWQ78yyMtFy85rnJvEo5kmXhirLkAoi1K0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "8wnCMDppqlJ0FWUQghYoB4t6oWYevKOAKwn1i+WxVGM="
+              "CodeSha256": "9gqrJtyDL7fjVeXFRuzl00rru+7rxNjfC/vgnDGYP6U="
             }
           },
           "ApiGatewayRestApi": {
@@ -399,7 +399,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT'",
                       "method.response.header.Access-Control-Allow-Credentials": "'false'"
                     },
                     "ResponseTemplates": {
@@ -827,6 +827,49 @@
               "MethodResponses": []
             }
           },
+          "ApiGatewayMethodUsersIdVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUsersIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
           "ApiGatewayMethodAuthenticationEmailaddressVarEncryptedpasswordVarGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -1085,7 +1128,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1555169558108": {
+          "ApiGatewayDeployment1555185530609": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1105,6 +1148,7 @@
               "ApiGatewayMethodUsersGet",
               "ApiGatewayMethodUsersPost",
               "ApiGatewayMethodUsersIdVarPut",
+              "ApiGatewayMethodUsersIdVarGet",
               "ApiGatewayMethodAuthenticationEmailaddressVarEncryptedpasswordVarGet",
               "ApiGatewayMethodCountrieslistGet",
               "ApiGatewayMethodLanguageslistGet",
@@ -1170,7 +1214,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion0brbcy16N4BihcQ9iLX2cs9gKf2geEhuwSbQ11VdMc"
+              "Ref": "AppLambdaVersionUpbBM3q8VWQ78yyMtFy85rnJvEo5kmXhirLkAoi1K0"
             }
           },
           "ServiceEndpoint": {
@@ -1295,6 +1339,32 @@
                 "methods": [
                   "OPTIONS",
                   "PUT"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "users/{id}",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
                 ],
                 "headers": [
                   "Content-Type",
@@ -1478,7 +1548,7 @@
     "artifact": "/Users/maxime/Documents/INSA/UPV/DevMobile/projet/server/.serverless/DreamMATE-rest-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/DreamMATE-rest-api/dev/1555169558062-2019-04-13T15:32:38.062Z",
+    "artifactDirectoryName": "serverless/DreamMATE-rest-api/dev/1555185530561-2019-04-13T19:58:50.561Z",
     "artifact": "DreamMATE-rest-api.zip"
   }
 }
