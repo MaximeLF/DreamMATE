@@ -105,4 +105,16 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="smokes">Smokes</string>
+    <string name="not_smokes">Doesn\'t smoke</string>
+    <string name="detailsProfile">Details</string>
+    <string name="originProfile">Originary from:</string>
+    <string name="placeProfile">Looking for a place in:</string>
+    <string name="fromProfile">From:</string>
+    <string name="toProfile">To:</string>
+    <string name="languagesProfile">Spoken languages:</string>
+    <string name="budgetProfile">Budget:</string>
+    <string name="sleepProfile">Usually sleeps at:</string>
+    <string name="occupationProfile">Occupation:</string>
+    <string name="descriptionProfile">Description</string>
 </resources>

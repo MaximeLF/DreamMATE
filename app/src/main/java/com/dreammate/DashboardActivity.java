@@ -114,13 +114,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 return true;
             }
             case R.id.matchesMenuItem: {
-
+                myDrawerLayout.closeDrawers();
             }
             case R.id.aboutMenuItem: {
 
-            }
-            case R.id.homeMenuItem: {
-                myDrawerLayout.closeDrawers();
             }
             default:
 
