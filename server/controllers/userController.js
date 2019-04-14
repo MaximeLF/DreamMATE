@@ -46,13 +46,13 @@ exports.modify_a_user = function(req, res){
 };
 exports.read_a_user = function(req, res){
     connectToDatabase().then(()=>{
-        User.findById(req.params.userId,'-encrypted_password', (err, user)=> {
+        User.findById(req.params.userId,{encrypted_password:0}, (err, user)=> {
             if (err){
                 res.status(err.status || 500);
                 res.send(err);
             }
 
-            res.json(user[0]);
+            res.json(user);
         });
     });
 };
@@ -98,7 +98,7 @@ exports.match = (req,res) =>{
                 let tabPromise=[];
                 arr[1].forEach(userId=>{
                     tabPromise.push(new Promise(resolve=>{
-                        User.findById(userId,'-encrypted_password',(err,u)=>{
+                        User.findById(userId,{encrypted_password:0},(err,u)=>{
                             if(err){
                                 res.status(err.status || 500);
                                 res.send(err);
@@ -132,7 +132,7 @@ function calculateMatches(id){
     return new Promise((resolve,reject)=>{
         connectToDatabase().then(()=>{
 
-            User.find({},'-encrypted_password',(err,users)=>{
+            User.find({},{encrypted_password:0},(err,users)=>{
                 if(err){
                     reject(err);
                 }
@@ -141,7 +141,7 @@ function calculateMatches(id){
                 users.splice(i,1);
                 let coefUsers = [];
                 users.forEach(user=>{
-                    if(cityMatchCoef(user1,user)!==0){
+                    if(cityMatch(user1,user)!==0){
                         let coef =dateMatchCoef(user1,user)+budgetMatchCoef(user1,user)+sleepTimeCoef(user1,user)+languageSpokenCoef(user1,user);
                         coefUsers.push([user,coef]);
                     }
@@ -181,26 +181,25 @@ function getExistingMatches(id){
 function dateMatchCoef(user1,user2){
     if(!user1.arrival_date || !user2.arrival_date) return 0;
     let res =0;
-    if(user1.arrival_date.getMonth()===user2.arrival_date.getMonth() && user1.arrival_date.getFullYear()===user2.arrival_date.getFullYear()) res+= 10;
+    if(user1.arrival_date.getMonth()===user2.arrival_date.getMonth() && user1.arrival_date.getFullYear()===user2.arrival_date.getFullYear()) res+= 20;
 
-    if(user1.departure_date && user2.departure_date && user1.departure_date.getMonth()===user2.departure_date.getMonth() ) res+=5;
+    if(user1.departure_date && user2.departure_date && user1.departure_date.getMonth()===user2.departure_date.getMonth() ) res+=10;
 
     return res;
 
 }
 
 function budgetMatchCoef(user1,user2){
-    if(!user1.max_budget || !user2.max_budget || !user1.min_budget || !user2.min_budget) return 0;
+    if(!user1.max_budget || !user2.max_budget ) return 0;
     const maxBudgetDelta = user1.max_budget*0.1;
-    const minBudgetDelta = user1.min_budget*0.25;
-    if(user2.max_budget<user1.max_budget+maxBudgetDelta && user2.min_budget>user1.min_budget+minBudgetDelta){
-        return 10;
+    if(user2.max_budget<user1.max_budget+maxBudgetDelta ){
+        return 20;
     }
     return 0;
 
 }
 
-function cityMatchCoef(user1,user2){
+function cityMatch(user1,user2){
     if(!user1.staying_city || !user2.staying_city) return 0;
     if(user1.staying_city===user2.staying_city) return 1;
     return 0;
@@ -216,7 +215,7 @@ function languageSpokenCoef(user1,user2){
     if(!user1.languages_spoken || !user2.languages_spoken) return 0;
     let res =0;
     user2.languages_spoken.forEach(lang=>{
-        if(user1.languages_spoken.includes(lang)) res+=2;
+        if(user1.languages_spoken.includes(lang)) res+=5;
     });
     return res;
 }

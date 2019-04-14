@@ -15,6 +15,9 @@ let UserSchema = new Schema({
        type: String,
         required: true
     },
+    telephone: {
+        type: String
+    },
     encrypted_password : {
       type: String,
         required: true
@@ -49,9 +52,6 @@ let UserSchema = new Schema({
             type: String,
             enum: film_types
         }],
-    },
-    min_budget: {
-        type: Number,
     },
     max_budget: {
         type: Number,

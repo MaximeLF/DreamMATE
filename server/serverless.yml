@@ -13,7 +13,6 @@ provider:
 functions:
   app:
     handler: bin/www.handler
-    # The `events` block defines how to trigger the http events
     events:
         - http:
             path: users
@@ -26,6 +25,10 @@ functions:
         - http:
             path: users/{id}
             method: put
+            cors: true
+        - http:
+            path: users/{id}
+            method: get
             cors: true
         - http:
             path: authentication/{email_address}/{encrypted_password}
