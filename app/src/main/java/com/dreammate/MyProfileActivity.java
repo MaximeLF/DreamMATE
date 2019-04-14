@@ -118,7 +118,7 @@ public class MyProfileActivity extends AppCompatActivity
 
         findViews();
 
-        dialog = ProgressDialog.show(MyProfileActivity.this, "", "Loading. Please wait...", true);
+        dialog = ProgressDialog.show(MyProfileActivity.this, "", getString(R.string.loading), true);
         dialog.show();
 
 
@@ -272,7 +272,6 @@ public class MyProfileActivity extends AppCompatActivity
                 String selected_country = parent.getItemAtPosition(position).toString();
 
                 cities = new ArrayList<>();
-                cities.add("Loading cities list");
 
                 Log.d("lua", "Country selection detected: " + selected_country);
 
